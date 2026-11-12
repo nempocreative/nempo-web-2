@@ -24,6 +24,7 @@ import { Route as ApiSplatRouteImport } from './routes/api/$'
 import { Route as ApiBackupRouteImport } from './routes/api/backup'
 import { Route as CmsIndexRouteImport } from './routes/cms.index'
 import { Route as CmsSplatRouteImport } from './routes/cms.$'
+import { Route as YearBookGengGrupRouteImport } from './routes/year-book.geng-grup'
 import { Route as WeddingInvitationTemaBiruTamanRouteImport } from './routes/wedding-invitation.tema.biru-taman'
 import { Route as WeddingInvitationTemaBiruTamanTanpaFotoRouteImport } from './routes/wedding-invitation.tema.biru-taman-tanpa-foto'
 import { Route as WeddingInvitationTemaHitamMewahRouteImport } from './routes/wedding-invitation.tema.hitam-mewah'
@@ -111,6 +112,11 @@ const CmsIndexRoute = CmsIndexRouteImport.update({
 const CmsSplatRoute = CmsSplatRouteImport.update({
   id: '/cms/$',
   path: '/cms/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const YearBookGengGrupRoute = YearBookGengGrupRouteImport.update({
+  id: '/year-book/geng-grup',
+  path: '/year-book/geng-grup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WeddingInvitationTemaBiruTamanRoute =
@@ -207,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/api/$': typeof ApiSplatRoute
   '/api/backup': typeof ApiBackupRoute
   '/cms/$': typeof CmsSplatRoute
+  '/year-book/geng-grup': typeof YearBookGengGrupRoute
   '/cms/': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
   '/wedding-invitation/tema/biru-taman-tanpa-foto': typeof WeddingInvitationTemaBiruTamanTanpaFotoRoute
@@ -237,6 +244,7 @@ export interface FileRoutesByTo {
   '/api/$': typeof ApiSplatRoute
   '/api/backup': typeof ApiBackupRoute
   '/cms/$': typeof CmsSplatRoute
+  '/year-book/geng-grup': typeof YearBookGengGrupRoute
   '/cms': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
   '/wedding-invitation/tema/biru-taman-tanpa-foto': typeof WeddingInvitationTemaBiruTamanTanpaFotoRoute
@@ -268,6 +276,7 @@ export interface FileRoutesById {
   '/api/$': typeof ApiSplatRoute
   '/api/backup': typeof ApiBackupRoute
   '/cms/$': typeof CmsSplatRoute
+  '/year-book/geng-grup': typeof YearBookGengGrupRoute
   '/cms/': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
   '/wedding-invitation/tema/biru-taman-tanpa-foto': typeof WeddingInvitationTemaBiruTamanTanpaFotoRoute
@@ -300,6 +309,7 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/api/backup'
     | '/cms/$'
+    | '/year-book/geng-grup'
     | '/cms/'
     | '/wedding-invitation/tema/biru-taman'
     | '/wedding-invitation/tema/biru-taman-tanpa-foto'
@@ -330,6 +340,7 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/api/backup'
     | '/cms/$'
+    | '/year-book/geng-grup'
     | '/cms'
     | '/wedding-invitation/tema/biru-taman'
     | '/wedding-invitation/tema/biru-taman-tanpa-foto'
@@ -360,6 +371,7 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/api/backup'
     | '/cms/$'
+    | '/year-book/geng-grup'
     | '/cms/'
     | '/wedding-invitation/tema/biru-taman'
     | '/wedding-invitation/tema/biru-taman-tanpa-foto'
@@ -391,6 +403,7 @@ export interface RootRouteChildren {
   ApiSplatRoute: typeof ApiSplatRoute
   ApiBackupRoute: typeof ApiBackupRoute
   CmsSplatRoute: typeof CmsSplatRoute
+  YearBookGengGrupRoute: typeof YearBookGengGrupRoute
   CmsIndexRoute: typeof CmsIndexRoute
 }
 
@@ -499,6 +512,13 @@ declare module '@tanstack/react-router' {
       path: '/cms/$'
       fullPath: '/cms/$'
       preLoaderRoute: typeof CmsSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/year-book/geng-grup': {
+      id: '/year-book/geng-grup'
+      path: '/year-book/geng-grup'
+      fullPath: '/year-book/geng-grup'
+      preLoaderRoute: typeof YearBookGengGrupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/wedding-invitation/tema/biru-taman': {
@@ -652,6 +672,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSplatRoute: ApiSplatRoute,
   ApiBackupRoute: ApiBackupRoute,
   CmsSplatRoute: CmsSplatRoute,
+  YearBookGengGrupRoute: YearBookGengGrupRoute,
   CmsIndexRoute: CmsIndexRoute,
 }
 export const routeTree = rootRouteImport
