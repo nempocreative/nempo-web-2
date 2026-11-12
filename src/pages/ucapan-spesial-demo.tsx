@@ -131,7 +131,7 @@ function IsiUcapan({ ucapan }: { ucapan: Ucapan }) {
     <section className="mus-wrap mus-hero">
       <figure className="mus-polaroid"><span className="mus-tape" aria-hidden="true" /><img src={ucapan.foto} alt={ucapan.fotoAlt} width={640} height={800} fetchPriority="high" /><figcaption>{ucapan.penerima} · {ucapan.tanggal}</figcaption></figure>
       <div>
-        <p className="mus-label">{ucapan.acara} · {ucapan.tanggal}</p>
+        <p className="mus-label">{ucapan.acara}</p>
         <h1>{ucapan.judul}</h1>
         <p className="mt-6 text-lg leading-8 text-muted-foreground">{ucapan.sapaan}.</p>
         <p className="mus-hand mt-4 text-2xl">{ucapan.keterangan}</p>
