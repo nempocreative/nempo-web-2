@@ -329,16 +329,18 @@ function KegiatanSection() {
             Cerita kelas dari awal sampai akhir.
           </h2>
         </Reveal>
-        <ol className="mt-10 space-y-8">
+        <ol className="relative mt-10 space-y-10 border-l pl-8 sm:pl-12" style={{ borderColor: "rgba(242,160,7,.35)" }}>
           {kegiatanKelas.map((k) => (
             <Reveal key={k.nomor} y={20}>
-              <li className="grid gap-2 sm:grid-cols-[64px_1fr]">
-                <p className="text-3xl font-black" style={{ ...serif, color: "rgba(242,160,7,.55)" }}>{k.nomor}</p>
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: BRASS }}>{k.waktu}</p>
-                  <h3 className="mt-1 text-xl font-bold" style={serif}>{k.judul}</h3>
-                  <p className="mt-2 text-sm leading-7" style={{ color: "rgba(244,246,255,.72)" }}>{k.teks}</p>
-                </div>
+              <li className="relative">
+                <span
+                  aria-hidden
+                  className="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full sm:-left-[53px]"
+                  style={{ background: BRASS, boxShadow: "0 0 0 5px rgba(242,160,7,.18)" }}
+                />
+                <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: BRASS }}>{k.waktu}</p>
+                <h3 className="mt-1 text-xl font-bold sm:text-2xl" style={serif}>{k.judul}</h3>
+                <p className="mt-2 max-w-xl text-sm leading-7" style={{ color: "rgba(244,246,255,.72)" }}>{k.teks}</p>
               </li>
             </Reveal>
           ))}
@@ -434,6 +436,11 @@ function Penutup() {
   return (
     <section className="px-5 pb-20 pt-4 text-center sm:px-10">
       <Reveal y={20}>
+        <div aria-hidden className="mx-auto mb-8 flex max-w-xs items-center gap-3">
+          <span className="h-px flex-1" style={{ background: LINE }} />
+          <span className="h-2 w-2 rotate-45" style={{ background: BRASS }} />
+          <span className="h-px flex-1" style={{ background: LINE }} />
+        </div>
         <p className="text-3xl sm:text-4xl" style={{ ...hand, color: ACCENT }}>
           sampai jumpa di reuni pertama, {kelasMeta.nama}!
         </p>
