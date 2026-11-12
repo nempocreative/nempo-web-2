@@ -51,11 +51,6 @@ function background(ctx: CanvasRenderingContext2D, p: Palet) {
   ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
   ctx.strokeStyle = p.accent; ctx.globalAlpha = 0.35; ctx.lineWidth = 2; rr(ctx, 40, 40, W - 80, H - 80, 28); ctx.stroke(); ctx.globalAlpha = 1;
 }
-function footer(ctx: CanvasRenderingContext2D, p: Palet, index: number) {
-  for (let i = 0; i < 3; i++) { ctx.fillStyle = i === index ? p.accent : p.muted; ctx.globalAlpha = i === index ? 1 : 0.35; ctx.beginPath(); ctx.arc(W / 2 - 28 + i * 28, H - 84, 7, 0, Math.PI * 2); ctx.fill(); }
-  ctx.globalAlpha = 1;
-}
-
 export async function renderFeedSlide(ucapan: Ucapan, index: number): Promise<Blob> {
   const p = PALET[ucapan.id];
   const slide = slideFeed(ucapan)[index];
@@ -77,7 +72,7 @@ export async function renderFeedSlide(ucapan: Ucapan, index: number): Promise<Bl
     const iw = pw - 48, ih = ph - 140; const c = coverCrop(img.naturalWidth, img.naturalHeight, iw, ih, 0.3);
     ctx.drawImage(img, c.sx, c.sy, c.sw, c.sh, -iw / 2, -ph / 2 + 24, iw, ih);
     ctx.fillStyle = p.paperInk; ctx.font = `600 46px ${HAND}`; ctx.textAlign = 'center';
-    ctx.fillText(`${ucapan.penerima} · ${ucapan.tanggal}`, 0, ph / 2 - 40);
+    ctx.fillText(slide.foto, 0, ph / 2 - 40);
     ctx.fillStyle = p.accent2; ctx.globalAlpha = 0.85; ctx.rotate((6 * Math.PI) / 180); ctx.fillRect(-80, -ph / 2 - 26, 160, 50); ctx.globalAlpha = 1;
     ctx.restore();
     // Title
@@ -90,20 +85,27 @@ export async function renderFeedSlide(ucapan: Ucapan, index: number): Promise<Bl
   }
 
   if (slide.jenis === 'surat') {
-    label(ctx, slide.label, 150, p.accent);
-    const x = 110, y = 200, w = W - 220, h = 930;
+    const x = 100, w = W - 200, pad = 64, lh = 72;
+    ctx.font = `500 46px ${SANS}`;
+    const lines = wrapLines(`“${slide.isi}”`, w - pad * 2, t => ctx.measureText(t).width, 9);
+    ctx.font = `500 36px ${SANS}`;
+    const tutup = wrapLines(slide.penutup, w - pad * 2, t => ctx.measureText(t).width, 2);
+    const h = 150 + lines.length * lh + 30 + tutup.length * 48 + 120 + 40;
+    const y = Math.max(210, (H - 120 - h) / 2 + 40);
+    label(ctx, slide.label, y - 50, p.accent);
     ctx.save(); ctx.shadowColor = 'rgba(20,10,20,0.25)'; ctx.shadowBlur = 40; ctx.shadowOffsetY = 18;
     ctx.fillStyle = p.paper; rr(ctx, x, y, w, h, 18); ctx.fill(); ctx.restore();
     ctx.strokeStyle = p.line; ctx.lineWidth = 2;
-    for (let ly = y + 140; ly < y + h - 40; ly += 64) { ctx.beginPath(); ctx.moveTo(x + 56, ly); ctx.lineTo(x + w - 56, ly); ctx.stroke(); }
-    ctx.fillStyle = p.accent; heart(ctx, W / 2, y + 44, 44);
-    ctx.fillStyle = p.paperInk; ctx.textAlign = 'left'; ctx.font = `500 40px ${SANS}`;
-    const lines = wrapLines(`“${slide.isi}”`, w - 120, t => ctx.measureText(t).width, 9);
-    lines.forEach((l, i) => ctx.fillText(l, x + 60, y + 128 + i * 64));
-    const after = y + 128 + lines.length * 64 + 40;
-    ctx.fillStyle = p.muted === '#B5BCD3' ? '#5A6385' : p.muted; ctx.font = `500 34px ${SANS}`; ctx.fillText(slide.penutup, x + 60, after);
-    ctx.fillStyle = p.accent === '#E1B54A' ? '#A9801F' : p.accent; ctx.font = `600 84px ${HAND}`; ctx.fillText(slide.tandaTangan, x + 60, after + 90);
-    ctx.fillStyle = p.ink; ctx.font = `600 46px ${HAND}`; ctx.textAlign = 'center'; ctx.fillText(`untuk ${ucapan.penerima}`, W / 2, 1200);
+    for (let ly = y + 150 + 18; ly < y + h - 30; ly += lh) { ctx.beginPath(); ctx.moveTo(x + 48, ly); ctx.lineTo(x + w - 48, ly); ctx.stroke(); }
+    ctx.fillStyle = p.accent; heart(ctx, W / 2, y + 52, 50);
+    ctx.fillStyle = p.paperInk; ctx.textAlign = 'left'; ctx.font = `500 46px ${SANS}`;
+    lines.forEach((l, i) => ctx.fillText(l, x + pad, y + 150 + i * lh));
+    let cy = y + 150 + lines.length * lh + 30;
+    ctx.fillStyle = ucapan.id === 'wisuda' ? '#5A6385' : p.muted; ctx.font = `500 36px ${SANS}`;
+    tutup.forEach((l, i) => ctx.fillText(l, x + pad, cy + i * 48)); cy += tutup.length * 48 + 70;
+    ctx.fillStyle = ucapan.id === 'wisuda' ? '#A9801F' : p.accent;
+    fit(ctx, slide.tandaTangan, s => `600 ${s}px ${HAND}`, 92, w - pad * 2); ctx.fillText(slide.tandaTangan, x + pad, cy);
+    ctx.fillStyle = p.ink; ctx.font = `600 50px ${HAND}`; ctx.textAlign = 'center'; ctx.fillText(`untuk ${ucapan.penerima}`, W / 2, Math.min(H - 90, y + h + 90));
   }
 
   if (slide.jenis === 'alasan') {
@@ -112,22 +114,21 @@ export async function renderFeedSlide(ucapan: Ucapan, index: number): Promise<Bl
     const s = fit(ctx, slide.judul, displayFont, 72, W - 180);
     const tl = wrapLines(slide.judul, W - 180, t => ctx.measureText(t).width, 2);
     tl.forEach((l, i) => ctx.fillText(l, W / 2, 250 + i * s * 1.12));
-    const gx = 110, gy = 250 + tl.length * s * 1.12 + 30, gap = 28, cw = (W - 220 - gap) / 2, ch = 300;
+    const gx = 100, gy = 250 + tl.length * s * 1.12 + 20, gap = 28, cw = (W - 200 - gap) / 2, ch = 380;
     slide.poin.forEach((pt, i) => {
       const cx = gx + (i % 2) * (cw + gap), cy = gy + Math.floor(i / 2) * (ch + gap);
       ctx.fillStyle = i === 0 || i === 3 ? p.accent : p.paper; rr(ctx, cx, cy, cw, ch, 22); ctx.fill();
       const on = i === 0 || i === 3; const fg = on ? (ucapan.id === 'wisuda' ? '#1A2340' : '#FFFFFF') : p.paperInk;
-      ctx.textAlign = 'left'; ctx.fillStyle = fg; ctx.font = `600 48px ${HAND}`; ctx.fillText(`0${i + 1}`, cx + 32, cy + 64);
-      ctx.font = `700 34px ${SANS}`; const head = wrapLines(pt.depan, cw - 64, t => ctx.measureText(t).width, 2);
-      head.forEach((l, j) => ctx.fillText(l, cx + 32, cy + 118 + j * 42));
-      ctx.font = `500 26px ${SANS}`; ctx.globalAlpha = 0.85;
-      const body = wrapLines(pt.isi, cw - 64, t => ctx.measureText(t).width, head.length > 1 ? 3 : 4);
-      body.forEach((l, j) => ctx.fillText(l, cx + 32, cy + 130 + head.length * 42 + j * 36)); ctx.globalAlpha = 1;
+      ctx.textAlign = 'left'; ctx.fillStyle = fg; ctx.font = `600 56px ${HAND}`; ctx.fillText(`0${i + 1}`, cx + 34, cy + 72);
+      ctx.font = `700 40px ${SANS}`; const head = wrapLines(pt.depan, cw - 68, t => ctx.measureText(t).width, 2);
+      head.forEach((l, j) => ctx.fillText(l, cx + 34, cy + 134 + j * 48));
+      ctx.font = `500 30px ${SANS}`; ctx.globalAlpha = 0.88;
+      const body = wrapLines(pt.isi, cw - 68, t => ctx.measureText(t).width, head.length > 1 ? 4 : 5);
+      body.forEach((l, j) => ctx.fillText(l, cx + 34, cy + 150 + head.length * 48 + j * 40)); ctx.globalAlpha = 1;
     });
     ctx.fillStyle = p.accent; ctx.textAlign = 'center';
-    fit(ctx, slide.penutup, displayFont, 64, W - 200); ctx.fillText(slide.penutup, W / 2, 1200);
+    fit(ctx, slide.penutup, displayFont, 64, W - 200); ctx.fillText(slide.penutup, W / 2, Math.min(H - 80, gy + 2 * ch + gap + 110));
   }
 
-  footer(ctx, p, index);
   return new Promise((resolve, reject) => canvas.toBlob(b => (b ? resolve(b) : reject(new Error('Gagal membuat gambar'))), 'image/png'));
 }

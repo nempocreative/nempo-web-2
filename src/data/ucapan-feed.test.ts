@@ -22,6 +22,13 @@ describe('desain feed ucapan', () => {
     const s = slideFeed(pacar)[2]!;
     expect(s.jenis === 'alasan' && s.poin.length).toBe(4);
   });
+  it('tanggal hanya muncul sekali di sampul', () => {
+    for (const u of ucapanSpesial) {
+      const s = slideFeed(u)[0]!;
+      const teks = s.jenis === 'sampul' ? [s.label, s.judul, s.keterangan, s.foto].join(' ') : '';
+      expect(teks.split(u.tanggal).length - 1).toBe(1);
+    }
+  });
   it('geser slide berputar di kedua ujung', () => {
     expect(geserSlide(2, 1)).toBe(0);
     expect(geserSlide(0, -1)).toBe(2);

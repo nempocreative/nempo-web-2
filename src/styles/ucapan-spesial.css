@@ -179,10 +179,11 @@
 .mus-feed-thumbs button[aria-pressed='true'] { border-color: hsl(var(--primary)); opacity: 1; }
 .mus-feed-thumbs img { width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 900px) { .mus-feed { grid-template-columns: 1fr; gap: 36px; } .mus-post { max-width: 440px; width: 100%; margin-inline: auto; } }
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .mus-bar-inner { flex-wrap: wrap; row-gap: 8px; padding-block: 8px; }
   .mus-format { order: 3; width: 100%; } .mus-format button { flex: 1; justify-content: center; }
   .mus-stage { min-height: calc(100svh - 110px); }
+  .mus-bar-back { order: 1; } .mus-switch { order: 2; margin-left: auto; }
 }
 @media (prefers-reduced-motion: reduce) {
   .mus-env-flap, .mus-env-letter, .mus-env-scene, .mus-flip-inner, .mus-tassel { transition: none; }

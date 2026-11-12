@@ -7,7 +7,7 @@ export const FEED_HEIGHT = 1350;
 export const JUMLAH_SLIDE = 3;
 
 export type SlideFeed =
-  | { jenis: 'sampul'; label: string; judul: string; keterangan: string }
+  | { jenis: 'sampul'; label: string; judul: string; keterangan: string; /** Handwritten line under the photo; the date appears once per slide. */ foto: string }
   | { jenis: 'surat'; label: string; isi: string; penutup: string; tandaTangan: string }
   | { jenis: 'alasan'; label: string; judul: string; poin: { depan: string; isi: string }[]; penutup: string };
 
@@ -27,7 +27,7 @@ const TAGAR: Record<JenisUcapan, string> = {
 /** Three slides: cover with photo, the first letter paragraph, then the four little reasons. */
 export function slideFeed(ucapan: Ucapan): SlideFeed[] {
   return [
-    { jenis: 'sampul', label: `${ucapan.acara} · ${ucapan.tanggal}`, judul: ucapan.judul, keterangan: ucapan.keterangan },
+    { jenis: 'sampul', label: ucapan.acara, judul: ucapan.judul, keterangan: ucapan.keterangan, foto: ucapan.keterangan.includes(ucapan.tanggal) ? ucapan.penerima : `${ucapan.penerima} · ${ucapan.tanggal}` },
     { jenis: 'surat', label: 'Sepucuk surat', isi: isiSurat(ucapan, ucapan.surat[0] ?? ''), penutup: ucapan.penutup, tandaTangan: ucapan.tandaTangan },
     { jenis: 'alasan', label: 'Geser terus', judul: ucapan.alasanJudul, poin: ucapan.alasan.slice(0, 4), penutup: `Dengan sayang, ${ucapan.dari}` },
   ];
