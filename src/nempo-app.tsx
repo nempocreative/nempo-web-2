@@ -99,6 +99,7 @@ const YearBookPage = lazyWithRetry(() => import("@/pages/year-book"));
 const YearBookAngkatanPage = lazyWithRetry(() => import("@/pages/year-book-angkatan"));
 const MomenKelasDemoPage = lazyWithRetry(() => import("@/pages/momen-kelas-demo"));
 const MomenGrupDemoPage = lazyWithRetry(() => import("@/pages/momen-grup-demo"));
+const MomenOrganisasiDemoPage = lazyWithRetry(() => import("@/pages/momen-organisasi-demo"));
 const SettingsPage = lazyWithRetry(() => import("@/pages/settings"));
 const ItineraryPage = lazyWithRetry(() => import("@/pages/itinerary"));
 const ItineraryComingSoonPage = lazyWithRetry(() => import("@/pages/itinerary-coming-soon"));
@@ -209,6 +210,7 @@ function Router() {
       <Route path="/year-book/2026" component={YearBookAngkatanPage} />
       <Route path="/year-book/kelas" component={MomenKelasDemoPage} />
       <Route path="/year-book/geng-grup" component={MomenGrupDemoPage} />
+      <Route path="/year-book/organisasi" component={MomenOrganisasiDemoPage} />
       <Route path="/year-book" component={YearBookPage} />
       <Route path="/contact" component={ContactPage} />
       
