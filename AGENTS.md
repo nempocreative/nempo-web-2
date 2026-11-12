@@ -30,6 +30,7 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Architecture rules
+- Organization moment portfolios keep fictional content in browser-safe data, use a scoped global theme and a metadata leaf route mounting NempoShell, crop member portraits from the same AI team photo, and reuse the shared session-only wall validator; why: keep identity, category navigation, and honest message behavior consistent.
 - Public community applications must pass database-side field validation; site settings are admin-only, and public ticket reads require both an active ticket and an active parent event; why: direct Data API requests must not bypass form validation or reveal unpublished records.
 - Friendship moment portfolios use browser-safe data, a scoped global CSS theme, a dedicated metadata leaf route mounting NempoShell, and the shared wall-message validator with session-only messages; scene variations use the same generated group photo as an edit reference and member portraits use crops of it; why: category content stays consistent, faces remain recognizable, and previews never pretend to save messages publicly.
 - Interactive yearbook memories use a focused browser-only UI and shared tested helpers; time capsules persist only in local device storage with downloadable backups, and sample farewell video uses the existing AI school photos; why: examples must work without pretending to send private letters or provide real class footage.
