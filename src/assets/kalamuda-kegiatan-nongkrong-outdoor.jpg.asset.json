@@ -1,11 +1,11 @@
 {
-  "asset_id": "6bdacf23-cde6-4f7c-9523-5fb7ed2b8f57",
-  "content_type": "image/jpeg",
-  "created_at": "2026-11-10T17:36:56Z",
+  "version": 1,
+  "asset_id": "e52cee04-da69-4a0a-91fb-280a5dea7b44",
+  "project_id": "731851de-e94f-4044-be46-230ac7ff0b85",
+  "url": "/__l5e/assets-v1/e52cee04-da69-4a0a-91fb-280a5dea7b44/kalamuda-kegiatan-nongkrong-outdoor.jpg",
+  "r2_key": "a/v1/731851de-e94f-4044-be46-230ac7ff0b85/e52cee04-da69-4a0a-91fb-280a5dea7b44/kalamuda-kegiatan-nongkrong-outdoor.jpg",
   "original_filename": "kalamuda-kegiatan-nongkrong-outdoor.jpg",
-  "project_id": "d1b0582d-d6e8-4e8d-9f5e-e4cca7815eb6",
-  "r2_key": "a/v1/d1b0582d-d6e8-4e8d-9f5e-e4cca7815eb6/6bdacf23-cde6-4f7c-9523-5fb7ed2b8f57/kalamuda-kegiatan-nongkrong-outdoor.jpg",
   "size": 494633,
-  "url": "/__l5e/assets-v1/6bdacf23-cde6-4f7c-9523-5fb7ed2b8f57/kalamuda-kegiatan-nongkrong-outdoor.jpg",
-  "version": 1
+  "content_type": "image/jpeg",
+  "created_at": "2026-11-12T07:10:33Z"
 }

@@ -1,11 +1,11 @@
 {
-  "asset_id": "40e6f2ff-82b3-454d-8451-1d70e603a0eb",
-  "content_type": "image/jpeg",
-  "created_at": "2026-11-10T17:36:51Z",
+  "version": 1,
+  "asset_id": "42747b58-5621-49c6-ab0f-de4885597110",
+  "project_id": "731851de-e94f-4044-be46-230ac7ff0b85",
+  "url": "/__l5e/assets-v1/42747b58-5621-49c6-ab0f-de4885597110/kalamuda-kegiatan-good-story-cafe.jpg",
+  "r2_key": "a/v1/731851de-e94f-4044-be46-230ac7ff0b85/42747b58-5621-49c6-ab0f-de4885597110/kalamuda-kegiatan-good-story-cafe.jpg",
   "original_filename": "kalamuda-kegiatan-good-story-cafe.jpg",
-  "project_id": "d1b0582d-d6e8-4e8d-9f5e-e4cca7815eb6",
-  "r2_key": "a/v1/d1b0582d-d6e8-4e8d-9f5e-e4cca7815eb6/40e6f2ff-82b3-454d-8451-1d70e603a0eb/kalamuda-kegiatan-good-story-cafe.jpg",
   "size": 603957,
-  "url": "/__l5e/assets-v1/40e6f2ff-82b3-454d-8451-1d70e603a0eb/kalamuda-kegiatan-good-story-cafe.jpg",
-  "version": 1
+  "content_type": "image/jpeg",
+  "created_at": "2026-11-12T07:10:31Z"
 }
