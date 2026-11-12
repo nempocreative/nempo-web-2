@@ -25,6 +25,7 @@ import { Route as ApiBackupRouteImport } from './routes/api/backup'
 import { Route as CmsIndexRouteImport } from './routes/cms.index'
 import { Route as CmsSplatRouteImport } from './routes/cms.$'
 import { Route as YearBookGengGrupRouteImport } from './routes/year-book.geng-grup'
+import { Route as YearBookOrganisasiRouteImport } from './routes/year-book.organisasi'
 import { Route as WeddingInvitationTemaBiruTamanRouteImport } from './routes/wedding-invitation.tema.biru-taman'
 import { Route as WeddingInvitationTemaBiruTamanTanpaFotoRouteImport } from './routes/wedding-invitation.tema.biru-taman-tanpa-foto'
 import { Route as WeddingInvitationTemaHitamMewahRouteImport } from './routes/wedding-invitation.tema.hitam-mewah'
@@ -117,6 +118,11 @@ const CmsSplatRoute = CmsSplatRouteImport.update({
 const YearBookGengGrupRoute = YearBookGengGrupRouteImport.update({
   id: '/year-book/geng-grup',
   path: '/year-book/geng-grup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const YearBookOrganisasiRoute = YearBookOrganisasiRouteImport.update({
+  id: '/year-book/organisasi',
+  path: '/year-book/organisasi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WeddingInvitationTemaBiruTamanRoute =
@@ -214,6 +220,7 @@ export interface FileRoutesByFullPath {
   '/api/backup': typeof ApiBackupRoute
   '/cms/$': typeof CmsSplatRoute
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
+  '/year-book/organisasi': typeof YearBookOrganisasiRoute
   '/cms/': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
   '/wedding-invitation/tema/biru-taman-tanpa-foto': typeof WeddingInvitationTemaBiruTamanTanpaFotoRoute
@@ -245,6 +252,7 @@ export interface FileRoutesByTo {
   '/api/backup': typeof ApiBackupRoute
   '/cms/$': typeof CmsSplatRoute
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
+  '/year-book/organisasi': typeof YearBookOrganisasiRoute
   '/cms': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
   '/wedding-invitation/tema/biru-taman-tanpa-foto': typeof WeddingInvitationTemaBiruTamanTanpaFotoRoute
@@ -277,6 +285,7 @@ export interface FileRoutesById {
   '/api/backup': typeof ApiBackupRoute
   '/cms/$': typeof CmsSplatRoute
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
+  '/year-book/organisasi': typeof YearBookOrganisasiRoute
   '/cms/': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
   '/wedding-invitation/tema/biru-taman-tanpa-foto': typeof WeddingInvitationTemaBiruTamanTanpaFotoRoute
@@ -310,6 +319,7 @@ export interface FileRouteTypes {
     | '/api/backup'
     | '/cms/$'
     | '/year-book/geng-grup'
+    | '/year-book/organisasi'
     | '/cms/'
     | '/wedding-invitation/tema/biru-taman'
     | '/wedding-invitation/tema/biru-taman-tanpa-foto'
@@ -341,6 +351,7 @@ export interface FileRouteTypes {
     | '/api/backup'
     | '/cms/$'
     | '/year-book/geng-grup'
+    | '/year-book/organisasi'
     | '/cms'
     | '/wedding-invitation/tema/biru-taman'
     | '/wedding-invitation/tema/biru-taman-tanpa-foto'
@@ -372,6 +383,7 @@ export interface FileRouteTypes {
     | '/api/backup'
     | '/cms/$'
     | '/year-book/geng-grup'
+    | '/year-book/organisasi'
     | '/cms/'
     | '/wedding-invitation/tema/biru-taman'
     | '/wedding-invitation/tema/biru-taman-tanpa-foto'
@@ -404,6 +416,7 @@ export interface RootRouteChildren {
   ApiBackupRoute: typeof ApiBackupRoute
   CmsSplatRoute: typeof CmsSplatRoute
   YearBookGengGrupRoute: typeof YearBookGengGrupRoute
+  YearBookOrganisasiRoute: typeof YearBookOrganisasiRoute
   CmsIndexRoute: typeof CmsIndexRoute
 }
 
@@ -519,6 +532,13 @@ declare module '@tanstack/react-router' {
       path: '/year-book/geng-grup'
       fullPath: '/year-book/geng-grup'
       preLoaderRoute: typeof YearBookGengGrupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/year-book/organisasi': {
+      id: '/year-book/organisasi'
+      path: '/year-book/organisasi'
+      fullPath: '/year-book/organisasi'
+      preLoaderRoute: typeof YearBookOrganisasiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/wedding-invitation/tema/biru-taman': {
@@ -673,6 +693,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiBackupRoute: ApiBackupRoute,
   CmsSplatRoute: CmsSplatRoute,
   YearBookGengGrupRoute: YearBookGengGrupRoute,
+  YearBookOrganisasiRoute: YearBookOrganisasiRoute,
   CmsIndexRoute: CmsIndexRoute,
 }
 export const routeTree = rootRouteImport
