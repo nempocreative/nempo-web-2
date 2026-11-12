@@ -91,8 +91,15 @@ function BackButton() {
 }
 
 function Hero() {
+  const heroFotos = [momenKelas[0], momenKelas[1], momenKelas[2]].filter(Boolean);
+  const stats = [
+    { n: siswaKelas.length, l: "Siswa" },
+    { n: momenKelas.length, l: "Momen" },
+    { n: kegiatanKelas.length, l: "Cerita" },
+    { n: pesanKelas.length, l: "Pesan" },
+  ];
   return (
-    <section className="relative overflow-hidden px-5 pb-16 pt-24 sm:px-10 sm:pt-28">
+    <section className="relative overflow-hidden px-5 pb-20 pt-24 sm:px-10 sm:pt-28">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.16]"
         style={{
@@ -100,9 +107,20 @@ function Hero() {
             "radial-gradient(circle at 12% 20%, #f2a007 0%, transparent 44%), radial-gradient(circle at 88% 64%, #2b3fd8 0%, transparent 46%)",
         }}
       />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage: `repeating-linear-gradient(0deg, ${INK} 0 1px, transparent 1px 34px)`,
+        }}
+      />
       <div className="relative mx-auto max-w-5xl text-center">
         <Reveal y={18}>
-          <Eyebrow>Momen Digital · Kelas</Eyebrow>
+          <p className="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.28em]" style={{ color: ACCENT }}>
+            <span aria-hidden className="inline-block h-px w-8" style={{ background: ACCENT }} />
+            Momen Digital · Kelas
+            <span aria-hidden className="inline-block h-px w-8" style={{ background: ACCENT }} />
+          </p>
           <h1 className="mt-4 text-[64px] font-black leading-[0.86] tracking-[-0.045em] sm:text-[110px]" style={serif}>
             {kelasMeta.nama}
           </h1>
@@ -117,8 +135,35 @@ function Hero() {
           <p className="mt-5 text-3xl sm:text-4xl" style={{ ...hand, color: ACCENT }}>
             “{kelasMeta.motto}”
           </p>
+        </Reveal>
+
+        <Reveal delay={280} y={30}>
+          <div className="mx-auto mt-12 grid max-w-3xl grid-cols-3 items-end gap-3 sm:gap-6">
+            {heroFotos.map((m, i) => (
+              <Polaroid
+                key={m.caption}
+                src={m.src}
+                caption={m.caption}
+                rotate={i === 0 ? -4 : i === 1 ? 2.5 : -1.5}
+                className={i === 1 ? "sm:-translate-y-4" : ""}
+              />
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={400} y={20}>
+          <div className="mx-auto mt-12 grid max-w-2xl grid-cols-4 divide-x rounded-2xl py-4" style={{ background: CARD, border: `1px solid ${LINE}` }}>
+            {stats.map((s) => (
+              <div key={s.l} style={{ borderColor: LINE }}>
+                <p className="text-2xl font-black sm:text-3xl" style={{ ...serif, color: INK }}>{s.n}</p>
+                <p className="mt-1 text-[9px] font-black uppercase tracking-[0.16em] sm:text-[10px]" style={{ color: INK_SOFT }}>
+                  {s.l}
+                </p>
+              </div>
+            ))}
+          </div>
           <p className="mt-4 text-[11px] font-black uppercase tracking-[0.24em]" style={{ color: INK_SOFT }}>
-            Tahun ajaran {kelasMeta.tahunAjaran} · {siswaKelas.length} siswa
+            Tahun ajaran {kelasMeta.tahunAjaran}
           </p>
         </Reveal>
       </div>
@@ -409,6 +454,12 @@ export default function MomenKelasDemoPage() {
         path={kelasMeta.halaman}
       />
       <BackButton />
+      <style>{`
+        .mk-lift { transition: transform 240ms ease, box-shadow 240ms ease; }
+        .mk-lift:hover { transform: translateY(-6px) rotate(0deg) !important; box-shadow: 0 26px 48px -22px rgba(20,28,63,.6); }
+        .mk-card { transition: transform 220ms ease, box-shadow 220ms ease; }
+        .mk-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px -18px rgba(20,28,63,.45); }
+      `}</style>
       <main className="min-h-screen overflow-x-clip" style={{ background: PAPER, color: INK }}>
         <Hero />
         <WaliKelasSection />
