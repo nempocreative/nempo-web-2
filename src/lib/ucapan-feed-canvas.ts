@@ -208,11 +208,17 @@ export async function renderFeedSlide(ucapan: Ucapan, index: number): Promise<Bl
       ctx.save(); ctx.shadowColor = 'rgba(20,10,20,0.22)'; ctx.shadowBlur = 26; ctx.shadowOffsetY = 12;
       ctx.fillStyle = on ? p.accent : p.paper; rr(ctx, cx, cy, cw, ch, 24); ctx.fill(); ctx.restore();
       const fg = on ? (ucapan.id === 'wisuda' ? '#1A2340' : '#FFFFFF') : p.paperInk;
-      // Number badge
-      ctx.save(); ctx.globalAlpha = on ? 0.25 : 0.12;
-      ctx.fillStyle = on ? (ucapan.id === 'wisuda' ? '#1A2340' : '#FFFFFF') : p.accent;
-      ctx.beginPath(); ctx.arc(cx + 62, cy + 62, 34, 0, Math.PI * 2); ctx.fill(); ctx.restore();
-      ctx.fillStyle = fg; ctx.font = `700 34px ${SANS}`; ctx.textAlign = 'center';
+      // Number badge: solid light circle with accent number on filled cards, soft accent circle on paper cards
+      if (on) {
+        ctx.save(); ctx.globalAlpha = 0.92; ctx.fillStyle = ucapan.id === 'wisuda' ? '#1A2340' : '#FFFFFF';
+        ctx.beginPath(); ctx.arc(cx + 62, cy + 62, 34, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+        ctx.fillStyle = p.accent;
+      } else {
+        ctx.save(); ctx.globalAlpha = 0.12; ctx.fillStyle = p.accent;
+        ctx.beginPath(); ctx.arc(cx + 62, cy + 62, 34, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+        ctx.fillStyle = fg;
+      }
+      ctx.font = `700 34px ${SANS}`; ctx.textAlign = 'center';
       ctx.fillText(`0${i + 1}`, cx + 62, cy + 74);
       ctx.textAlign = 'left'; ctx.font = `700 40px ${SANS}`;
       const head = wrapLines(pt.depan, cw - 68, t => ctx.measureText(t).width, 2);
@@ -223,7 +229,7 @@ export async function renderFeedSlide(ucapan: Ucapan, index: number): Promise<Bl
     });
     ctx.fillStyle = p.accent; ctx.textAlign = 'center';
     fit(ctx, slide.penutup, displayFont, 66, W - 200);
-    ctx.fillText(slide.penutup, W / 2, Math.min(H - 98, gy + 2 * ch + gap + 102));
+    ctx.fillText(slide.penutup, W / 2, Math.min(H - 112, gy + 2 * ch + gap + 96));
     handle(ctx, ucapan, p);
   }
 
