@@ -49,9 +49,9 @@ export default function YearBookPage() {
   return (
     <Layout>
       <SEO
-        title="Year Book untuk Sekolah"
-        description="Year book sekolah dari Nempo: profil lulusan, galeri momen satu tahun, pesan guru, dan dinding pesan — versi cetak maupun digital."
-        keywords="year book sekolah, buku tahunan sekolah, jasa yearbook, buku tahunan angkatan, yearbook digital"
+        title="Momen Digital — Year Book, Kelas, Organisasi, Event"
+        description="Momen digital dari Nempo: kenangan kelompok dan acara dalam satu halaman — year book angkatan, kelas, geng, organisasi, event, dan komunitas."
+        keywords="momen digital, year book sekolah, buku tahunan sekolah, jasa yearbook, buku tahunan angkatan, yearbook digital, kenangan kelas, dokumentasi organisasi, after movie event"
         path="/year-book"
       />
 
@@ -78,19 +78,20 @@ export default function YearBookPage() {
                 Layanan Nempo
               </p>
               <h1 className="yb-serif mt-3 text-[52px] font-black leading-[0.86] tracking-[-0.045em] sm:text-[84px] lg:text-[104px]">
-                Year Book
+                Momen Digital
               </h1>
               <p className="yb-serif mt-2 text-2xl font-semibold italic sm:text-3xl" style={{ color: INK_SOFT }}>
-                buku tahunan untuk satu angkatan
+                kenangan kelompok dan acara dalam satu halaman
               </p>
             </Reveal>
 
             <Reveal delay={160} y={22}>
               <p className="mt-6 max-w-2xl text-sm leading-7 sm:text-base" style={{ color: INK_SOFT }}>
-                Year book adalah buku yang merangkum satu angkatan sekolah: wajah
-                setiap lulusan, foto-foto satu tahun, pesan guru, dan catatan
-                antarteman. Nempo yang kumpulkan isinya, desain, lalu cetak atau
-                bagikan sebagai buku digital.
+                Momen digital adalah halaman khusus yang merangkum kenangan sebuah
+                kelompok atau acara: foto, cerita, pesan, dan musik — dibagikan
+                lewat satu tautan yang bisa dibuka siapa saja. Bentuknya bermacam-macam:
+                year book angkatan, kelas, geng, organisasi, event, sampai komunitas.
+                Nempo yang kumpulkan isinya, desain, lalu bagikan sebagai halaman digital.
               </p>
               <p className="yb-hand mt-4 text-2xl sm:text-3xl" style={{ color: ACCENT }}>
                 mau lihat bentuknya seperti apa?
