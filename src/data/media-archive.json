@@ -1,0 +1,38 @@
+[
+  {
+    "pointer": "src/assets/kalamuda-kegiatan-nongkrong-outdoor.jpg.asset.json",
+    "filename": "kalamuda-kegiatan-nongkrong-outdoor.jpg",
+    "source_url": "https://id-preview--be92b31a-57ea-4a76-90e3-afa4ba47ed96.lovable.app/__l5e/assets-v1/6bdacf23-cde6-4f7c-9523-5fb7ed2b8f57/kalamuda-kegiatan-nongkrong-outdoor.jpg",
+    "url": "/__l5e/assets-v1/6bdacf23-cde6-4f7c-9523-5fb7ed2b8f57/kalamuda-kegiatan-nongkrong-outdoor.jpg",
+    "size": 494633,
+    "content_type": "image/jpeg",
+    "sha256": "963937f267e907cd3aeb288d7f3f4c8f68cd38e9e830d6afbcad240034352014"
+  },
+  {
+    "pointer": "src/assets/kalamuda-kegiatan-basecamp.jpg.asset.json",
+    "filename": "kalamuda-kegiatan-basecamp.jpg",
+    "source_url": "https://id-preview--be92b31a-57ea-4a76-90e3-afa4ba47ed96.lovable.app/__l5e/assets-v1/e0636a23-7321-4c81-8844-d8ca3d4dc2c4/kalamuda-kegiatan-basecamp.jpg",
+    "url": "/__l5e/assets-v1/e0636a23-7321-4c81-8844-d8ca3d4dc2c4/kalamuda-kegiatan-basecamp.jpg",
+    "size": 524998,
+    "content_type": "image/jpeg",
+    "sha256": "1b54c5d86e8901b607727e94efcc57ef6654124fbb4851fa09cba9fc4360675b"
+  },
+  {
+    "pointer": "src/assets/kalamuda-kegiatan-good-story-cafe.jpg.asset.json",
+    "filename": "kalamuda-kegiatan-good-story-cafe.jpg",
+    "source_url": "https://id-preview--be92b31a-57ea-4a76-90e3-afa4ba47ed96.lovable.app/__l5e/assets-v1/40e6f2ff-82b3-454d-8451-1d70e603a0eb/kalamuda-kegiatan-good-story-cafe.jpg",
+    "url": "/__l5e/assets-v1/40e6f2ff-82b3-454d-8451-1d70e603a0eb/kalamuda-kegiatan-good-story-cafe.jpg",
+    "size": 603957,
+    "content_type": "image/jpeg",
+    "sha256": "ee17f74eeffbc19b89e093316d9b9e45f1e6287191135d079e3a14cea7738abb"
+  },
+  {
+    "pointer": "src/assets/kalamuda-kegiatan-hunting-foto.jpg.asset.json",
+    "filename": "kalamuda-kegiatan-hunting-foto.jpg",
+    "source_url": "https://id-preview--be92b31a-57ea-4a76-90e3-afa4ba47ed96.lovable.app/__l5e/assets-v1/f1e1509f-4e8a-411c-aed1-60886674f4e7/kalamuda-kegiatan-hunting-foto.jpg",
+    "url": "/__l5e/assets-v1/f1e1509f-4e8a-411c-aed1-60886674f4e7/kalamuda-kegiatan-hunting-foto.jpg",
+    "size": 285741,
+    "content_type": "image/jpeg",
+    "sha256": "41c5f9681db8245d49c6b5db7f61a1175f64710538d9fb1a076c780d308a5209"
+  }
+]

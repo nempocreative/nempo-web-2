@@ -1,0 +1,58 @@
+// Browser-safe seed data for events that must exist in the database.
+// After a remix the new project's database starts without rows, so this module is
+// the source of truth for re-applying them with the database query tool.
+// Values here come from the homepage card in src/pages/home.tsx — never invent extras.
+
+export interface EventSeed {
+  slug: string;
+  name: string;
+  title: string;
+  category: string;
+  date: string;
+  time_start: string;
+  time_end: string;
+  location: string;
+  description: string;
+  organizer: string;
+  price: number;
+  guest_stars: { name: string; role: string }[];
+  image: string;
+  active: boolean;
+  featured: boolean;
+}
+
+export const EVENT_SEEDS: EventSeed[] = [
+  {
+    slug: "musicomedy-night",
+    name: "MusiComedy Night",
+    title: "MusiComedy Night",
+    category: "Musik",
+    date: "2026-11-04",
+    time_start: "15:00",
+    time_end: "23:00",
+    location: "Good Story Cafe, Jl. Sudirman Copong No. 11, Garut",
+    description:
+      "Malam musik dan komedi bareng NEMPO.ID × Kala Muda di Good Story Cafe.",
+    organizer: "NEMPO.ID × Kala Muda",
+    price: 0,
+    guest_stars: [{ name: "Saduli Ragap", role: "Bintang Tamu" }],
+    image:
+      "/images/events/musicomedy-night-poster.webp",
+    active: true,
+    featured: true,
+  },
+];
+
+export function eventSeedBySlug(slug: string): EventSeed | undefined {
+  return EVENT_SEEDS.find((event) => event.slug === slug);
+}
+
+export function eventSeedInsertSql(event: EventSeed): string {
+  const json = JSON.stringify(event.guest_stars);
+  const text = (value: string) => `'${value.replace(/'/g, "''")}'`;
+  return [
+    "insert into public.events (slug, name, title, category, date, time_start, time_end, location, description, organizer, price, guest_stars, image, banner_image, active, featured, crew_active, allow_voucher, service_fee_percent, visitors)",
+    `select ${text(event.slug)}, ${text(event.name)}, ${text(event.title)}, ${text(event.category)}, ${text(event.date)}, ${text(event.time_start)}, ${text(event.time_end)}, ${text(event.location)}, ${text(event.description)}, ${text(event.organizer)}, ${event.price}, ${text(json)}::jsonb, ${text(event.image)}, ${text(event.image)}, ${event.active}, ${event.featured}, false, false, 0, 0`,
+    `where not exists (select 1 from public.events where slug = ${text(event.slug)});`,
+  ].join("\n");
+}
