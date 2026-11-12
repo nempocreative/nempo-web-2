@@ -28,7 +28,6 @@ function Amplop({ ucapan, onOpen }: { ucapan: Ucapan; onOpen: () => void }) {
   return <section className="mus-stage" aria-label={`Amplop ucapan untuk ${ucapan.penerima}`}>
     <div className="mus-env-scene" data-tahap={tahap}>
       <div className="mus-env-intro">
-        <p className="mus-label">{ucapan.label} · {ucapan.tanggal}</p>
         <p className="mus-display text-4xl text-primary sm:text-5xl">Ada sesuatu untukmu, {ucapan.penerima}</p>
       </div>
       <div className="mus-envelope">
