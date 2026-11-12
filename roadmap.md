@@ -11,3 +11,4 @@
   - [x] Kartu Ucapan Spesial di halaman Momen Digital aktif ("Sudah bisa dilihat")
 
 - [x] Ucapan Spesial: foto muncul lebih cepat setelah amplop dibuka
+- [x] Ucapan Spesial: pilihan desain feed Instagram selain situs
