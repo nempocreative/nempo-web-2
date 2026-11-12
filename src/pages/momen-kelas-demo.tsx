@@ -43,9 +43,37 @@ const hand: CSSProperties = { fontFamily: HAND };
 
 function Eyebrow({ children, color = ACCENT }: { children: ReactNode; color?: string }) {
   return (
-    <p className="text-[11px] font-black uppercase tracking-[0.28em]" style={{ color }}>
+    <p className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.28em]" style={{ color }}>
+      <span aria-hidden className="inline-block h-px w-8" style={{ background: color }} />
       {children}
     </p>
+  );
+}
+
+function Tape({ className = "", rotate = -4 }: { className?: string; rotate?: number }) {
+  return (
+    <span
+      aria-hidden
+      className={`absolute z-10 h-5 w-20 ${className}`}
+      style={{ background: "rgba(242,160,7,.34)", border: "1px solid rgba(242,160,7,.4)", transform: `rotate(${rotate}deg)` }}
+    />
+  );
+}
+
+function Polaroid({ src, caption, rotate, className = "" }: { src: string; caption: string; rotate: number; className?: string }) {
+  return (
+    <figure
+      className={`mk-lift relative bg-white p-2.5 pb-2 ${className}`}
+      style={{ transform: `rotate(${rotate}deg)`, boxShadow: "0 18px 40px -22px rgba(20,28,63,.55)" }}
+    >
+      <Tape className="-top-3 left-1/2 -translate-x-1/2" rotate={rotate * -1.5} />
+      <div className="aspect-[4/3] overflow-hidden">
+        <img src={src} alt={caption} loading="lazy" className="h-full w-full object-cover" />
+      </div>
+      <figcaption className="mt-2 break-words px-1 pb-1 text-center text-xl leading-[1.15]" style={{ ...hand, color: INK }}>
+        {caption}
+      </figcaption>
+    </figure>
   );
 }
 
@@ -63,8 +91,15 @@ function BackButton() {
 }
 
 function Hero() {
+  const heroFotos = [momenKelas[0], momenKelas[1], momenKelas[2]].filter(Boolean);
+  const stats = [
+    { n: siswaKelas.length, l: "Siswa" },
+    { n: momenKelas.length, l: "Momen" },
+    { n: kegiatanKelas.length, l: "Cerita" },
+    { n: pesanKelas.length, l: "Pesan" },
+  ];
   return (
-    <section className="relative overflow-hidden px-5 pb-16 pt-24 sm:px-10 sm:pt-28">
+    <section className="relative overflow-hidden px-5 pb-20 pt-24 sm:px-10 sm:pt-28">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.16]"
         style={{
@@ -72,9 +107,20 @@ function Hero() {
             "radial-gradient(circle at 12% 20%, #f2a007 0%, transparent 44%), radial-gradient(circle at 88% 64%, #2b3fd8 0%, transparent 46%)",
         }}
       />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage: `repeating-linear-gradient(0deg, ${INK} 0 1px, transparent 1px 34px)`,
+        }}
+      />
       <div className="relative mx-auto max-w-5xl text-center">
         <Reveal y={18}>
-          <Eyebrow>Momen Digital · Kelas</Eyebrow>
+          <p className="inline-flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.28em]" style={{ color: ACCENT }}>
+            <span aria-hidden className="inline-block h-px w-8" style={{ background: ACCENT }} />
+            Momen Digital · Kelas
+            <span aria-hidden className="inline-block h-px w-8" style={{ background: ACCENT }} />
+          </p>
           <h1 className="mt-4 text-[64px] font-black leading-[0.86] tracking-[-0.045em] sm:text-[110px]" style={serif}>
             {kelasMeta.nama}
           </h1>
@@ -89,8 +135,35 @@ function Hero() {
           <p className="mt-5 text-3xl sm:text-4xl" style={{ ...hand, color: ACCENT }}>
             “{kelasMeta.motto}”
           </p>
+        </Reveal>
+
+        <Reveal delay={280} y={30}>
+          <div className="mx-auto mt-12 grid max-w-3xl grid-cols-3 items-end gap-3 sm:gap-6">
+            {heroFotos.map((m, i) => (
+              <Polaroid
+                key={m.caption}
+                src={m.src}
+                caption={m.caption}
+                rotate={i === 0 ? -4 : i === 1 ? 2.5 : -1.5}
+                className={i === 1 ? "sm:-translate-y-4" : ""}
+              />
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={400} y={20}>
+          <div className="mx-auto mt-12 grid max-w-2xl grid-cols-4 divide-x rounded-2xl py-4" style={{ background: CARD, border: `1px solid ${LINE}` }}>
+            {stats.map((s) => (
+              <div key={s.l} style={{ borderColor: LINE }}>
+                <p className="text-2xl font-black sm:text-3xl" style={{ ...serif, color: INK }}>{s.n}</p>
+                <p className="mt-1 text-[9px] font-black uppercase tracking-[0.16em] sm:text-[10px]" style={{ color: INK_SOFT }}>
+                  {s.l}
+                </p>
+              </div>
+            ))}
+          </div>
           <p className="mt-4 text-[11px] font-black uppercase tracking-[0.24em]" style={{ color: INK_SOFT }}>
-            Tahun ajaran {kelasMeta.tahunAjaran} · {siswaKelas.length} siswa
+            Tahun ajaran {kelasMeta.tahunAjaran}
           </p>
         </Reveal>
       </div>
@@ -104,13 +177,21 @@ function WaliKelasSection() {
     <section className="border-y px-5 py-16 sm:px-10" style={{ borderColor: LINE, background: CARD }}>
       <div className="mx-auto grid max-w-5xl items-center gap-8 sm:grid-cols-[220px_1fr]">
         <Reveal y={24}>
-          <img
-            src={waliKelas.foto}
-            alt={`Foto ${waliKelas.nama}`}
-            className="mx-auto aspect-square w-44 rounded-3xl object-cover sm:w-full"
-            style={{ border: `3px solid ${LINE}` }}
-            loading="lazy"
-          />
+          <div className="relative mx-auto w-44 sm:w-full">
+            <div
+              aria-hidden
+              className="absolute -inset-3 rounded-[2rem]"
+              style={{ border: `2px dashed ${BRASS}`, transform: "rotate(-2deg)" }}
+            />
+            <img
+              src={waliKelas.foto}
+              alt={`Foto ${waliKelas.nama}`}
+              className="relative aspect-square w-full rounded-3xl object-cover"
+              style={{ border: `3px solid ${LINE}` }}
+              loading="lazy"
+            />
+            <Tape className="-top-4 left-1/2 -translate-x-1/2" rotate={3} />
+          </div>
         </Reveal>
         <Reveal delay={120} y={24}>
           <Eyebrow>Wali kelas</Eyebrow>
@@ -144,7 +225,7 @@ function StrukturSection() {
           return (
             <article
               key={s.jabatan}
-              className="rounded-2xl p-5 text-center"
+              className="mk-card rounded-2xl p-5 text-center"
               style={{ background: CARD, border: `1px solid ${LINE}`, animationDelay: `${i * 80}ms` }}
             >
               <img
@@ -181,10 +262,13 @@ function SiswaSection() {
           {siswaKelas.map((s, i) => (
             <article
               key={s.id}
-              className="overflow-hidden rounded-2xl"
+              className="mk-card overflow-hidden rounded-2xl"
               style={{ background: PAPER, border: `1px solid ${LINE}`, animationDelay: `${i * 70}ms` }}
             >
-              <img src={s.foto} alt={`Foto ${s.nama}`} className="aspect-[4/5] w-full object-cover" loading="lazy" />
+              <div className="relative">
+                <img src={s.foto} alt={`Foto ${s.nama}`} className="aspect-[4/5] w-full object-cover" loading="lazy" />
+                <span aria-hidden className="absolute inset-x-0 top-0 h-1.5" style={{ background: s.warna }} />
+              </div>
               <div className="p-4">
                 <h3 className="text-lg font-bold" style={serif}>{s.nama}</h3>
                 <p className="text-xs font-bold" style={{ color: s.warna }}>{s.julukan}</p>
@@ -218,24 +302,17 @@ function MomenSection() {
           Momen yang tidak sempat difoto pun masih kami ingat.
         </h2>
       </Reveal>
-      <div ref={ref} className={`mt-9 grid gap-4 sm:grid-cols-2 ${className}`}>
+      <div ref={ref} className={`mt-9 grid gap-6 sm:grid-cols-2 ${className}`}>
         {momenKelas.map((m, i) => (
-          <figure
-            key={m.caption}
-            className="overflow-hidden rounded-2xl"
-            style={{ background: CARD, border: `1px solid ${LINE}`, animationDelay: `${i * 80}ms` }}
-          >
-            <img src={m.src} alt={m.caption} className="aspect-[4/3] w-full object-cover" loading="lazy" />
-            <figcaption className="flex items-center justify-between gap-3 px-4 py-3">
-              <span className="text-sm font-bold" style={{ color: INK }}>{m.caption}</span>
-              <span
-                className="shrink-0 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em]"
-                style={{ background: "rgba(43,63,216,.1)", color: ACCENT }}
-              >
-                {m.tag}
-              </span>
-            </figcaption>
-          </figure>
+          <div key={m.caption} className="relative" style={{ animationDelay: `${i * 80}ms` }}>
+            <Polaroid src={m.src} caption={m.caption} rotate={i % 2 === 0 ? -1.6 : 1.8} />
+            <span
+              className="absolute -right-1 -top-2 z-20 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em] shadow-sm"
+              style={{ background: CARD, color: ACCENT, border: `1px solid ${LINE}` }}
+            >
+              {m.tag}
+            </span>
+          </div>
         ))}
       </div>
     </section>
@@ -252,16 +329,18 @@ function KegiatanSection() {
             Cerita kelas dari awal sampai akhir.
           </h2>
         </Reveal>
-        <ol className="mt-10 space-y-8">
+        <ol className="relative mt-10 space-y-10 border-l pl-8 sm:pl-12" style={{ borderColor: "rgba(242,160,7,.35)" }}>
           {kegiatanKelas.map((k) => (
             <Reveal key={k.nomor} y={20}>
-              <li className="grid gap-2 sm:grid-cols-[64px_1fr]">
-                <p className="text-3xl font-black" style={{ ...serif, color: "rgba(242,160,7,.55)" }}>{k.nomor}</p>
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: BRASS }}>{k.waktu}</p>
-                  <h3 className="mt-1 text-xl font-bold" style={serif}>{k.judul}</h3>
-                  <p className="mt-2 text-sm leading-7" style={{ color: "rgba(244,246,255,.72)" }}>{k.teks}</p>
-                </div>
+              <li className="relative">
+                <span
+                  aria-hidden
+                  className="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full sm:-left-[53px]"
+                  style={{ background: BRASS, boxShadow: "0 0 0 5px rgba(242,160,7,.18)" }}
+                />
+                <p className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: BRASS }}>{k.waktu}</p>
+                <h3 className="mt-1 text-xl font-bold sm:text-2xl" style={serif}>{k.judul}</h3>
+                <p className="mt-2 max-w-xl text-sm leading-7" style={{ color: "rgba(244,246,255,.72)" }}>{k.teks}</p>
               </li>
             </Reveal>
           ))}
@@ -336,9 +415,10 @@ function DindingPesanSection() {
           {notes.map((n, i) => (
             <Reveal key={`${n.dari}-${i}`} y={16}>
               <blockquote
-                className="rounded-xl p-4 shadow-sm"
+                className="relative rounded-xl p-4 pt-6 shadow-sm"
                 style={{ background: NOTE_COLORS[i % NOTE_COLORS.length], transform: `rotate(${i % 2 === 0 ? -1.2 : 1.1}deg)` }}
               >
+                <Tape className="-top-2.5 left-1/2 h-4 w-14 -translate-x-1/2" rotate={i % 2 === 0 ? 4 : -5} />
                 <p className="text-lg leading-snug" style={{ ...hand, color: INK }}>{n.teks}</p>
                 <footer className="mt-2 text-xs font-black uppercase tracking-[0.14em]" style={{ color: INK_SOFT }}>
                   — {n.dari}
@@ -356,6 +436,11 @@ function Penutup() {
   return (
     <section className="px-5 pb-20 pt-4 text-center sm:px-10">
       <Reveal y={20}>
+        <div aria-hidden className="mx-auto mb-8 flex max-w-xs items-center gap-3">
+          <span className="h-px flex-1" style={{ background: LINE }} />
+          <span className="h-2 w-2 rotate-45" style={{ background: BRASS }} />
+          <span className="h-px flex-1" style={{ background: LINE }} />
+        </div>
         <p className="text-3xl sm:text-4xl" style={{ ...hand, color: ACCENT }}>
           sampai jumpa di reuni pertama, {kelasMeta.nama}!
         </p>
@@ -381,6 +466,12 @@ export default function MomenKelasDemoPage() {
         path={kelasMeta.halaman}
       />
       <BackButton />
+      <style>{`
+        .mk-lift { transition: transform 240ms ease, box-shadow 240ms ease; }
+        .mk-lift:hover { transform: translateY(-6px) rotate(0deg) !important; box-shadow: 0 26px 48px -22px rgba(20,28,63,.6); }
+        .mk-card { transition: transform 220ms ease, box-shadow 220ms ease; }
+        .mk-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px -18px rgba(20,28,63,.45); }
+      `}</style>
       <main className="min-h-screen overflow-x-clip" style={{ background: PAPER, color: INK }}>
         <Hero />
         <WaliKelasSection />
