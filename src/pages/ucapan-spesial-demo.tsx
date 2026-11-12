@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { ArrowLeft, Heart, MailOpen, RotateCcw, Send } from 'lucide-react';
 import { Layout } from '@/components/layout';
 import { SEO } from '@/components/seo';
@@ -17,13 +17,15 @@ function Heading({ label, children }: { label: string; children: ReactNode }) {
 
 function Amplop({ ucapan, onOpen }: { ucapan: Ucapan; onOpen: () => void }) {
   const [tahap, setTahap] = useState<'tutup' | 'buka' | 'selesai'>('tutup');
+  // Fetch the hero photo while the envelope is still closed so it is ready the moment the card opens.
+  useEffect(() => { const img = new Image(); img.src = ucapan.foto; img.decode?.().catch(() => {}); }, [ucapan.foto]);
   function buka() {
     if (tahap !== 'tutup') return;
     const reduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (reduced) { onOpen(); return; }
     setTahap('buka');
-    window.setTimeout(() => setTahap('selesai'), 1750);
-    window.setTimeout(onOpen, 2150);
+    window.setTimeout(() => setTahap('selesai'), 1250);
+    window.setTimeout(onOpen, 1500);
   }
   return <section className="mus-stage" aria-label={`Amplop ucapan untuk ${ucapan.penerima}`}>
     <div className="mus-env-scene" data-tahap={tahap}>
