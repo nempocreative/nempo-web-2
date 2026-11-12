@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import { Link } from "@/lib/wouter";
 import { Reveal } from "@/lib/yearbook-motion";
 import { WALL_NAME_MAX, WALL_TEXT_MAX, type WallNote } from "@/data/year-book";
-import { albumGrup, anggotaGrup, buatPesanGrup, cariLaguUrl, ceritaGrup, grupMeta, pesanGrup, playlistGrup } from "@/data/momen-grup";
+import { albumGrup, anggotaGrup, buatPesanGrup, cariLaguUrl, ceritaGrup, grupMeta, kebiasaanGrup, pesanGrup, playlistGrup } from "@/data/momen-grup";
 
 function Heading({ label, children }: { label: string; children: ReactNode }) {
   return <Reveal><p className="mg-eyebrow">{label}</p><h2 className="mg-title">{children}</h2></Reveal>;
@@ -18,7 +18,8 @@ function Album() {
   const [kategori, setKategori] = useState("Semua");
   const [selected, setSelected] = useState<(typeof albumGrup)[number] | null>(null);
   return <section id="album" className="mg-wrap mg-section">
-    <Heading label="02 / Album kecil kita">Ada cerita di balik setiap foto.</Heading>
+    <Heading label="02 / Album kecil kita">Bukan cuma foto bagus.<br />Ini hari-hari yang ingin diulang.</Heading>
+    <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground">Ada yang berawal dari rencana dadakan, ada yang cuma makan bareng. Semuanya punya satu kesamaan: pulangnya selalu bawa cerita.</p>
     <div className="my-7 flex gap-2" role="group" aria-label="Kategori foto">
       {["Semua", "Nongkrong", "Jalan bareng"].map((tag) => <Button key={tag} size="sm" variant={kategori === tag ? "default" : "outline"} aria-pressed={kategori === tag} onClick={() => setKategori(tag)}>{tag}</Button>)}
     </div>
@@ -26,7 +27,7 @@ function Album() {
       {albumGrup.filter((foto) => kategori === "Semua" || foto.kategori === kategori).map((foto) => <Reveal key={foto.id}>
         <Button variant="ghost" className="mg-album-shot" aria-label={`Buka foto ${foto.judul}`} onClick={() => setSelected(foto)}>
           <img src={foto.src} alt={foto.judul} width={800} height={600} loading="lazy" />
-          <span className="block px-2 pb-2 pt-4"><span className="flex items-center justify-between gap-2 text-xs text-muted-foreground"><span>{foto.tanggal}</span><Camera className="size-4" /></span><span className="mg-hand mt-2 block text-foreground">{foto.judul}</span></span>
+          <span className="block px-2 pb-2 pt-4"><span className="flex items-center justify-between gap-2 text-xs text-muted-foreground"><span>{foto.tanggal} · {foto.kategori}</span><Camera className="size-4" /></span><span className="mg-hand mt-2 block text-foreground">{foto.judul}</span><span className="mt-2 block text-sm font-normal leading-6 text-muted-foreground">{foto.cerita.split('. ')[0]}.</span></span>
         </Button>
       </Reveal>)}
     </div>
@@ -84,7 +85,8 @@ export default function MomenGrupDemoPage() {
       <section id="anggota" className="mg-wrap mg-section">
         <Heading label="01 / Orang-orangnya">Bukan geng paling ramai.<br />Tapi selalu ada.</Heading>
         <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground">Satu suka merencanakan, satu suka mendengarkan. Satu menyimpan foto, satu memilih lagu. Entah bagaimana, semuanya pas kalau duduk bersama.</p>
-        <div className="mt-9 grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-4">{anggotaGrup.map((a) => <article className="mg-member" key={a.id}><div className="mg-portrait"><img src={a.foto} alt={`Foto ${a.nama}`} loading="lazy" /></div><div className="p-5"><h3>{a.nama}</h3><p className="mg-member-label mt-1">{a.julukan}</p><p className="mt-4 text-xs leading-6 text-muted-foreground">{a.kebiasaan}</p><p className="mt-4 border-t border-border pt-4 text-sm italic leading-6">“{a.quote}”</p></div></article>)}</div>
+        <div className="mt-9 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-4">{anggotaGrup.map((a, i) => <article className="mg-member" key={a.id}><div className="mg-portrait"><img src={a.foto} alt={`Foto ${a.nama}, anggota Teman Sore`} width={400} height={500} loading="lazy" /><span className="mg-portrait-number">0{i + 1}</span></div><div className="p-5"><h3>{a.nama}</h3><p className="mg-member-label mt-1">{a.julukan}</p><p className="mt-3 text-xs font-semibold text-primary">{a.kesibukan}</p><p className="mt-4 text-sm leading-7 text-muted-foreground">{a.kebiasaan}</p><div className="mt-5 border-t border-border pt-4"><p className="text-[10px] font-semibold uppercase text-muted-foreground">Pesanan yang sudah kami hafal</p><p className="mt-2 text-sm">{a.pesanan}</p></div><p className="mg-hand mt-5 text-2xl leading-snug">“{a.quote}”</p></div></article>)}</div>
+        <div className="mg-rituals mt-14"><p className="mg-hand text-3xl text-primary">Hal-hal kecil yang bikin kita tetap kita.</p><div className="mt-7 grid gap-8 md:grid-cols-3">{kebiasaanGrup.map((k) => <div key={k.nomor}><span className="mg-serif text-2xl text-primary">{k.nomor}</span><h3 className="mt-3 text-base font-semibold">{k.judul}</h3><p className="mt-2 text-sm leading-7 text-muted-foreground">{k.teks}</p></div>)}</div></div>
       </section>
       <Album />
       <section id="cerita" className="mg-story-band"><div className="mg-wrap mg-section"><Heading label="03 / Dari dulu sampai sekarang">Kita nggak langsung sedekat ini.</Heading><ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">{ceritaGrup.map((c) => <li key={c.tahun} className="border-t border-primary/30 pt-5"><p className="mg-serif text-4xl text-primary">{c.tahun}</p><h3 className="mt-5 text-lg font-semibold leading-6">{c.judul}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{c.teks}</p></li>)}</ol><p className="mg-hand mt-10 text-3xl text-primary">Ada yang berubah. Ada yang tetap: kita.</p></div></section>
