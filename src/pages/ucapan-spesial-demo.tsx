@@ -16,25 +16,32 @@ function Heading({ label, children }: { label: string; children: ReactNode }) {
 }
 
 function Amplop({ ucapan, onOpen }: { ucapan: Ucapan; onOpen: () => void }) {
-  const [terbuka, setTerbuka] = useState(false);
+  const [tahap, setTahap] = useState<'tutup' | 'buka' | 'selesai'>('tutup');
   function buka() {
-    setTerbuka(true);
+    if (tahap !== 'tutup') return;
     const reduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    window.setTimeout(onOpen, reduced ? 0 : 750);
+    if (reduced) { onOpen(); return; }
+    setTahap('buka');
+    window.setTimeout(() => setTahap('selesai'), 1750);
+    window.setTimeout(onOpen, 2150);
   }
   return <section className="mus-stage" aria-label={`Amplop ucapan untuk ${ucapan.penerima}`}>
-    <div className="text-center">
-      <p className="mus-label">{ucapan.label} · {ucapan.tanggal}</p>
-      <p className="mus-display mb-10 text-4xl text-primary sm:text-5xl">Ada sesuatu untukmu, {ucapan.penerima}</p>
-      <div className="mus-envelope mx-auto" data-open={terbuka}>
+    <div className="mus-env-scene" data-tahap={tahap}>
+      <div className="mus-env-intro">
+        <p className="mus-label">{ucapan.label} · {ucapan.tanggal}</p>
+        <p className="mus-display text-4xl text-primary sm:text-5xl">Ada sesuatu untukmu, {ucapan.penerima}</p>
+      </div>
+      <div className="mus-envelope">
         <div className="mus-env-back" />
         <div className="mus-env-letter"><p className="mus-hand text-3xl leading-tight">{ucapan.sapaan}</p></div>
         <div className="mus-env-front" />
         <div className="mus-env-flap" />
         <div className="mus-env-seal" aria-hidden="true"><Heart className="size-6" fill="currentColor" /></div>
       </div>
-      <p className="mus-to mus-hand text-2xl">dari {ucapan.dari}</p>
-      <Button size="lg" className="mt-12" onClick={buka} disabled={terbuka}><MailOpen className="size-4" />Buka ucapannya</Button>
+      <div className="mus-env-outro">
+        <p className="mus-to mus-hand text-2xl">dari {ucapan.dari}</p>
+        <Button size="lg" className="mt-10" onClick={buka} disabled={tahap !== 'tutup'}><MailOpen className="size-4" />Buka ucapannya</Button>
+      </div>
     </div>
   </section>;
 }

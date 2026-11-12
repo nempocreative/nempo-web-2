@@ -38,19 +38,27 @@
 .mus-switch button { white-space: nowrap; }
 
 /* Envelope */
-.mus-stage { min-height: calc(100svh - 62px); display: grid; place-items: center; padding: 40px 20px; }
-.mus-envelope { position: relative; width: min(440px, 88vw); aspect-ratio: 1.45; perspective: 900px; }
+.mus-stage { min-height: calc(100svh - 62px); display: grid; place-items: center; padding: 32px 20px 40px; }
+/* Scene: the space above the envelope is reserved for the opened flap and the rising letter, so nothing overlaps. */
+.mus-env-scene { --env-w: min(440px, 88vw); --env-h: calc(var(--env-w) / 1.45); position: relative; width: var(--env-w); padding-top: calc(var(--env-h) * .62); text-align: center; transition: opacity .4s ease, transform .4s ease; }
+.mus-env-intro { position: absolute; left: 50%; top: 0; width: min(92vw, 640px); height: calc(var(--env-h) * .62); translate: -50% 0; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 22px; transition: opacity .3s ease, transform .3s ease; }
+.mus-env-outro { transition: opacity .3s ease; }
+.mus-envelope { position: relative; width: 100%; aspect-ratio: 1.45; }
 .mus-env-back, .mus-env-front, .mus-env-flap { position: absolute; inset: 0; border-radius: 14px; }
-.mus-env-back { background: hsl(var(--primary) / .85); box-shadow: 0 30px 60px -30px hsl(var(--primary) / .7); }
-.mus-env-letter { position: absolute; left: 7%; right: 7%; top: 8%; bottom: 8%; border-radius: 10px; background: hsl(var(--mus-paper)); color: hsl(345 30% 20%); display: grid; place-items: center; text-align: center; padding: 16px; transition: transform .6s ease .15s; }
-.mus-env-front { background: linear-gradient(to top right, hsl(var(--primary)) 50%, transparent 50.5%) left / 50.5% 100% no-repeat, linear-gradient(to top left, hsl(var(--primary)) 50%, transparent 50.5%) right / 50.5% 100% no-repeat; z-index: 2; }
-.mus-env-flap { z-index: 3; clip-path: polygon(0 0, 100% 0, 50% 58%); background: hsl(var(--primary) / .92); transform-origin: top; transition: transform .6s ease, z-index 0s .3s; filter: brightness(1.08); }
-.mus-env-seal { position: absolute; z-index: 4; left: 50%; top: 52%; translate: -50% -50%; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: hsl(var(--secondary)); color: hsl(var(--secondary-foreground)); box-shadow: 0 4px 0 hsl(var(--foreground) / .15); transition: opacity .3s; }
-.mus-envelope[data-open='true'] .mus-env-flap { transform: rotateX(180deg); z-index: 1; }
-.mus-envelope[data-open='true'] .mus-env-letter { transform: translateY(-46%); }
-.mus-env-letter > * { opacity: 0; transition: opacity .3s ease .45s; }
-.mus-envelope[data-open='true'] .mus-env-letter > * { opacity: 1; }
-.mus-envelope[data-open='true'] .mus-env-seal { opacity: 0; }
+.mus-env-back { z-index: 1; background: hsl(var(--primary)); filter: brightness(.8); box-shadow: 0 30px 60px -30px hsl(var(--primary) / .7); }
+.mus-env-letter { position: absolute; z-index: 2; left: 7%; right: 7%; top: 7%; height: 80%; border-radius: 10px; background: hsl(var(--mus-paper)); color: hsl(345 30% 20%); display: grid; place-items: start center; text-align: center; padding: 22px 16px; box-shadow: 0 10px 24px -14px hsl(var(--foreground) / .5); transition: transform .7s cubic-bezier(.2,.8,.2,1) .85s; }
+.mus-env-letter > * { opacity: 0; transition: opacity .3s ease .9s; }
+.mus-env-front { z-index: 3; clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%); background: hsl(var(--primary)); }
+.mus-env-flap { z-index: 4; clip-path: polygon(0 0, 100% 0, 50% 58%); background: hsl(var(--primary)); transform-origin: top; transition: transform .6s ease .2s, z-index 0s .5s; filter: brightness(1.08); }
+.mus-env-seal { position: absolute; z-index: 5; left: 50%; top: 52%; translate: -50% -50%; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: hsl(var(--secondary)); color: hsl(var(--secondary-foreground)); box-shadow: 0 4px 0 hsl(var(--foreground) / .15); transition: opacity .2s, scale .2s; }
+/* Opening order: words and seal fade, flap swings up (then drops behind the letter), letter rises into the reserved space. */
+.mus-env-scene:not([data-tahap='tutup']) .mus-env-intro { opacity: 0; transform: translateY(-8px); }
+.mus-env-scene:not([data-tahap='tutup']) .mus-env-outro { opacity: 0; }
+.mus-env-scene:not([data-tahap='tutup']) .mus-env-seal { opacity: 0; scale: .7; }
+.mus-env-scene:not([data-tahap='tutup']) .mus-env-flap { transform: perspective(900px) rotateX(180deg); z-index: 1; }
+.mus-env-scene:not([data-tahap='tutup']) .mus-env-letter { transform: translateY(-58%); }
+.mus-env-scene:not([data-tahap='tutup']) .mus-env-letter > * { opacity: 1; }
+.mus-env-scene[data-tahap='selesai'] { opacity: 0; transform: scale(1.04); }
 .mus-to { margin-top: 18px; text-align: center; color: hsl(var(--muted-foreground)); }
 .mus-page[data-tema='wisuda'] .mus-env-letter { color: hsl(224 42% 14%); }
 
@@ -138,7 +146,7 @@
   .mus-bar-inner { gap: 6px; padding-inline: 10px; }
   .mus-switch { flex: 1; gap: 4px; }
   .mus-switch button { flex: 1; padding-inline: 6px; font-size: 12px; }
-  .mus-stage { min-height: calc(100svh - 62px); padding-top: 28px; }
+  .mus-stage { min-height: calc(100svh - 62px); padding-top: 20px; }
   .mus-hero { padding-block: 40px 20px; }
   .mus-hero h1 { font-size: 48px; } .mus-page[data-tema='sahabat'] .mus-hero h1 { font-size: 38px; }
   .mus-letter { padding: 36px 22px 32px; } .mus-letter p { font-size: 16px; }
@@ -146,7 +154,7 @@
   .mus-moment { padding: 28px 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mus-env-flap, .mus-env-letter, .mus-flip-inner, .mus-tassel { transition: none; }
+  .mus-env-flap, .mus-env-letter, .mus-env-scene, .mus-flip-inner, .mus-tassel { transition: none; }
   .mus-reveal { animation: none; }
   .mus-candle::before { animation: none; }
 }
