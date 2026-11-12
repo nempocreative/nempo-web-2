@@ -19,7 +19,7 @@ import {
 describe("menu Year Book", () => {
   it("muncul di menu utama dan menunjuk ke /year-book", () => {
     const item = mainNavItems.find((n) => n.id === "year-book");
-    expect(item?.label).toBe("Year Book");
+    expect(item?.label).toBe("Momen Digital");
     expect(item?.href).toBe("/year-book");
   });
 });

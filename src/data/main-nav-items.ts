@@ -25,5 +25,5 @@ export const mainNavItems = [
   { id: "business-system", href: "/business-system", label: "Business System", icon: Building2, color: "#0F766E", bg: "#CCFBF1" },
   { id: "nempo-community", href: "/komunitas", label: "Nempo Community", icon: Users, color: "#2563EB", bg: "#DBEAFE" },
   { id: "merchandise-komunitas", href: "/merchandise", label: "Merchandise Komunitas", icon: Shirt, color: "#A62F78", bg: "#FCE7F3" },
-  { id: "year-book", href: "/year-book", label: "Year Book", icon: GraduationCap, color: "#2B3FD8", bg: "#E4E9FF" },
+  { id: "year-book", href: "/year-book", label: "Momen Digital", icon: GraduationCap, color: "#2B3FD8", bg: "#E4E9FF" },
 ] as const;

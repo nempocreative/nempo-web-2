@@ -5,9 +5,13 @@ import { NEMPO_CONSULT_URL } from "@/lib/contact";
 import {
   ArrowRight,
   BookOpen,
+  CalendarDays,
   Camera,
+  Flag,
   GraduationCap,
+  Heart,
   MessageCircle,
+  School,
   Users,
 } from "lucide-react";
 import {
@@ -41,7 +45,48 @@ const stats = [
   { n: teacherMessages.length + wallNotes.length, l: "Pesan" },
 ];
 
+const momenKategori = [
+  {
+    icon: GraduationCap,
+    nama: "Year Book",
+    ringkas: "Buku tahunan satu angkatan: profil lulusan, galeri momen, pesan guru, dan dinding pesan.",
+    status: "Sudah bisa dilihat",
+    href: yearBookMeta.halamanBuku,
+  },
+  {
+    icon: School,
+    nama: "Kelas",
+    ringkas: "Versi kecil untuk satu kelas: wali kelas, daftar siswa, momen sehari-hari, dan pesan antarteman.",
+    status: "Segera hadir",
+  },
+  {
+    icon: Heart,
+    nama: "Geng & Grup",
+    ringkas: "Halaman kenangan satu circle: foto hangout, playlist bareng, dan pesan satu sama lain.",
+    status: "Segera hadir",
+  },
+  {
+    icon: Flag,
+    nama: "Organisasi",
+    ringkas: "Dokumentasi satu periode kepengurusan: pengurus, program kerja, dan pesan penutup pembina.",
+    status: "Segera hadir",
+  },
+  {
+    icon: CalendarDays,
+    nama: "Event",
+    ringkas: "After-movie digital satu acara: galeri foto terbaik, video dokumentasi, dan daftar panitia.",
+    status: "Segera hadir",
+  },
+  {
+    icon: Users,
+    nama: "Komunitas",
+    ringkas: "Rayakan anniversary atau momen besar komunitas: sejarah, anggota, dan capaian setahun.",
+    status: "Segera hadir",
+  },
+];
+
 export default function YearBookPage() {
+  const { ref: kategoriRef, className: kategoriClass } = useStagger<HTMLDivElement>(0.06);
   const { ref: isiRef, className: isiClass } = useStagger<HTMLDivElement>(0.06);
   const { ref: langkahRef, className: langkahClass } = useStagger<HTMLOListElement>(0.12);
   const { ref: bentukRef, className: bentukClass } = useStagger<HTMLDivElement>(0.1);
@@ -49,9 +94,9 @@ export default function YearBookPage() {
   return (
     <Layout>
       <SEO
-        title="Year Book untuk Sekolah"
-        description="Year book sekolah dari Nempo: profil lulusan, galeri momen satu tahun, pesan guru, dan dinding pesan — versi cetak maupun digital."
-        keywords="year book sekolah, buku tahunan sekolah, jasa yearbook, buku tahunan angkatan, yearbook digital"
+        title="Momen Digital — Year Book, Kelas, Organisasi, Event"
+        description="Momen digital dari Nempo: kenangan kelompok dan acara dalam satu halaman — year book angkatan, kelas, geng, organisasi, event, dan komunitas."
+        keywords="momen digital, year book sekolah, buku tahunan sekolah, jasa yearbook, buku tahunan angkatan, yearbook digital, kenangan kelas, dokumentasi organisasi, after movie event"
         path="/year-book"
       />
 
@@ -78,22 +123,23 @@ export default function YearBookPage() {
                 Layanan Nempo
               </p>
               <h1 className="yb-serif mt-3 text-[52px] font-black leading-[0.86] tracking-[-0.045em] sm:text-[84px] lg:text-[104px]">
-                Year Book
+                Momen Digital
               </h1>
               <p className="yb-serif mt-2 text-2xl font-semibold italic sm:text-3xl" style={{ color: INK_SOFT }}>
-                buku tahunan untuk satu angkatan
+                kenangan kelompok dan acara dalam satu halaman
               </p>
             </Reveal>
 
             <Reveal delay={160} y={22}>
               <p className="mt-6 max-w-2xl text-sm leading-7 sm:text-base" style={{ color: INK_SOFT }}>
-                Year book adalah buku yang merangkum satu angkatan sekolah: wajah
-                setiap lulusan, foto-foto satu tahun, pesan guru, dan catatan
-                antarteman. Nempo yang kumpulkan isinya, desain, lalu cetak atau
-                bagikan sebagai buku digital.
+                Momen digital adalah halaman khusus yang merangkum kenangan sebuah
+                kelompok atau acara: foto, cerita, pesan, dan musik — dibagikan
+                lewat satu tautan yang bisa dibuka siapa saja. Bentuknya bermacam-macam:
+                year book angkatan, kelas, geng, organisasi, event, sampai komunitas.
+                Nempo yang kumpulkan isinya, desain, lalu bagikan sebagai halaman digital.
               </p>
               <p className="yb-hand mt-4 text-2xl sm:text-3xl" style={{ color: ACCENT }}>
-                mau lihat bentuknya seperti apa?
+                pilih kategorinya, mulai dari year book
               </p>
             </Reveal>
 
@@ -120,6 +166,64 @@ export default function YearBookPage() {
               </a>
             </div>
             </Reveal>
+          </div>
+        </section>
+
+        {/* ── KATEGORI MOMEN DIGITAL ── */}
+        <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-16 lg:px-8">
+          <Reveal className="max-w-xl" y={20}>
+            <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: ACCENT }}>
+              Kategorinya
+            </p>
+            <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
+              Satu konsep, banyak bentuk.
+            </h2>
+            <p className="mt-3 text-sm leading-6" style={{ color: INK_SOFT }}>
+              Year book sudah bisa dilihat contohnya. Kategori lain menyusul —
+              kalau kelompokmu butuh duluan, ceritakan saja ke Nempo.
+            </p>
+          </Reveal>
+
+          <div ref={kategoriRef} className={`mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 ${kategoriClass}`}>
+            {momenKategori.map((k, i) => {
+              const inner = (
+                <>
+                  <div className="flex items-start justify-between gap-3">
+                    <k.icon className="h-6 w-6" style={{ color: ACCENT }} />
+                    <span
+                      className="rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em]"
+                      style={
+                        k.href
+                          ? { background: "rgba(43,63,216,.1)", color: ACCENT }
+                          : { background: "rgba(242,160,7,.14)", color: "#a86e00" }
+                      }
+                    >
+                      {k.status}
+                    </span>
+                  </div>
+                  <h3 className="yb-serif mt-3 text-xl font-bold">{k.nama}</h3>
+                  <p className="mt-2 text-sm leading-6" style={{ color: INK_SOFT }}>
+                    {k.ringkas}
+                  </p>
+                  {k.href && (
+                    <p className="mt-4 inline-flex items-center gap-2 text-sm font-black" style={{ color: ACCENT }}>
+                      Lihat contohnya
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                    </p>
+                  )}
+                </>
+              );
+              const style = { background: CARD, border: `1px solid ${LINE}`, animationDelay: `${i * 70}ms` };
+              return k.href ? (
+                <Link key={k.nama} href={k.href} className="yb-card group block rounded-2xl p-5" style={style}>
+                  {inner}
+                </Link>
+              ) : (
+                <article key={k.nama} className="yb-card rounded-2xl p-5" style={style}>
+                  {inner}
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -290,14 +394,15 @@ export default function YearBookPage() {
             >
               <div className="max-w-xl">
                 <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: BRASS }}>
-                  Buat Year Book Sekolahmu
+                  Buat Momen Digitalmu
                 </p>
                 <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
-                  Punya angkatan yang mau dibukukan?
+                  Punya kelompok atau acara yang mau dibukukan?
                 </h2>
                 <p className="mt-3 text-sm leading-7" style={{ color: "rgba(244,246,255,.68)" }}>
-                  Ceritakan jumlah siswa dan kelasnya, sisanya Nempo yang urus —
-                  dari kumpul data sampai buku siap dibagikan.
+                  Ceritakan kelompoknya — angkatan, kelas, geng, organisasi, event,
+                  atau komunitas — sisanya Nempo yang urus, dari kumpul data sampai
+                  halamannya siap dibagikan.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a
