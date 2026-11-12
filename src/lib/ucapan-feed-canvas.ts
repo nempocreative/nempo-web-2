@@ -220,7 +220,7 @@ export async function renderFeedSlide(ucapan: Ucapan, index: number): Promise<Bl
       }
       ctx.font = `700 34px ${SANS}`; ctx.textAlign = 'center';
       ctx.fillText(`0${i + 1}`, cx + 62, cy + 74);
-      ctx.textAlign = 'left'; ctx.font = `700 40px ${SANS}`;
+      ctx.textAlign = 'left'; ctx.fillStyle = fg; ctx.font = `700 40px ${SANS}`;
       const head = wrapLines(pt.depan, cw - 68, t => ctx.measureText(t).width, 2);
       head.forEach((l, j) => ctx.fillText(l, cx + 34, cy + 150 + j * 48));
       ctx.font = `500 30px ${SANS}`; ctx.globalAlpha = 0.88;
