@@ -394,14 +394,15 @@ export default function YearBookPage() {
             >
               <div className="max-w-xl">
                 <p className="text-[10px] font-black uppercase tracking-[0.24em]" style={{ color: BRASS }}>
-                  Buat Year Book Sekolahmu
+                  Buat Momen Digitalmu
                 </p>
                 <h2 className="yb-serif mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-4xl">
-                  Punya angkatan yang mau dibukukan?
+                  Punya kelompok atau acara yang mau dibukukan?
                 </h2>
                 <p className="mt-3 text-sm leading-7" style={{ color: "rgba(244,246,255,.68)" }}>
-                  Ceritakan jumlah siswa dan kelasnya, sisanya Nempo yang urus —
-                  dari kumpul data sampai buku siap dibagikan.
+                  Ceritakan kelompoknya — angkatan, kelas, geng, organisasi, event,
+                  atau komunitas — sisanya Nempo yang urus, dari kumpul data sampai
+                  halamannya siap dibagikan.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a
