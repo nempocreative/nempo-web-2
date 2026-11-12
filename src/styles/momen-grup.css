@@ -49,11 +49,7 @@
 .mg-stats span { color: var(--muted-foreground); font-size: 12px; }
 .mg-stats strong { display: block; font-size: 24px; font-weight: 600; }
 .mg-portrait { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background: var(--muted); }
-.mg-portrait img { position: absolute; width: 440%; max-width: none; height: 100%; object-fit: cover; object-position: center; }
-.mg-portrait-nara img { left: -33%; }
-.mg-portrait-bima img { left: -115%; }
-.mg-portrait-rani img { left: -216%; }
-.mg-portrait-dito img { left: -317%; }
+.mg-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .mg-member { border: 1px solid var(--border); background: var(--card); border-radius: 6px; overflow: hidden; }
 .mg-member:nth-child(2) { margin-top: 22px; }
 .mg-member:nth-child(4) { margin-top: 22px; }

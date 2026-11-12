@@ -1,3 +1,7 @@
+import fotoNara from "@/assets/momen-grup-nara.webp";
+import fotoBima from "@/assets/momen-grup-bima.webp";
+import fotoRani from "@/assets/momen-grup-rani.webp";
+import fotoDito from "@/assets/momen-grup-dito.webp";
 import fotoSore from "@/assets/momen-grup-sore.jpg";
 import fotoHunting from "@/assets/yearbook/momen-hunting-foto.webp";
 import fotoAkustik from "@/assets/yearbook/momen-akustik.webp";
@@ -15,10 +19,10 @@ export const grupMeta = {
 };
 
 export const anggotaGrup = [
-  { id: "nara", nama: "Nara", julukan: "Si penyimpan cerita", posisi: "mg-portrait-nara", kebiasaan: "Kamera selalu ikut. Pulang paling akhir karena masih pilih foto.", quote: "Foto boleh blur, momennya jangan sampai lupa." },
-  { id: "bima", nama: "Bima", julukan: "Penggagas rencana dadakan", posisi: "mg-portrait-bima", kebiasaan: "Kalimat andalan: ‘dekat kok’. Ternyata masih satu jam lagi.", quote: "Kalau semua nunggu luang, kapan kita ketemu?" },
-  { id: "rani", nama: "Rani", julukan: "Tempat semua cerita pulang", posisi: "mg-portrait-rani", kebiasaan: "Hafal pesanan semua orang. Selalu bawa cerita dan tisu cadangan.", quote: "Nggak harus punya kabar baik buat datang." },
-  { id: "dito", nama: "Dito", julukan: "Penjaga playlist", posisi: "mg-portrait-dito", kebiasaan: "Satu lagu untuk setiap perjalanan. Sering nyanyi, jarang tepat nada.", quote: "Yang penting bareng, bukan ke mana." },
+  { id: "nara", nama: "Nara", julukan: "Si penyimpan cerita", foto: fotoNara, kebiasaan: "Kamera selalu ikut. Pulang paling akhir karena masih pilih foto.", quote: "Foto boleh blur, momennya jangan sampai lupa." },
+  { id: "bima", nama: "Bima", julukan: "Penggagas rencana dadakan", foto: fotoBima, kebiasaan: "Kalimat andalan: ‘dekat kok’. Ternyata masih satu jam lagi.", quote: "Kalau semua nunggu luang, kapan kita ketemu?" },
+  { id: "rani", nama: "Rani", julukan: "Tempat semua cerita pulang", foto: fotoRani, kebiasaan: "Hafal pesanan semua orang. Selalu bawa cerita dan tisu cadangan.", quote: "Nggak harus punya kabar baik buat datang." },
+  { id: "dito", nama: "Dito", julukan: "Penjaga playlist", foto: fotoDito, kebiasaan: "Satu lagu untuk setiap perjalanan. Sering nyanyi, jarang tepat nada.", quote: "Yang penting bareng, bukan ke mana." },
 ];
 
 export const albumGrup = [

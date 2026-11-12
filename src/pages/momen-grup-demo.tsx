@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, type ReactNode, type FormEvent } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Camera, Heart, MapPin, Music2, Send } from "lucide-react";
 import { Layout } from "@/components/layout";
 import { SEO } from "@/components/seo";
@@ -10,7 +10,7 @@ import { Reveal } from "@/lib/yearbook-motion";
 import { WALL_NAME_MAX, WALL_TEXT_MAX, type WallNote } from "@/data/year-book";
 import { albumGrup, anggotaGrup, buatPesanGrup, cariLaguUrl, ceritaGrup, grupMeta, pesanGrup, playlistGrup } from "@/data/momen-grup";
 
-function Heading({ label, children }: { label: string; children: React.ReactNode }) {
+function Heading({ label, children }: { label: string; children: ReactNode }) {
   return <Reveal><p className="mg-eyebrow">{label}</p><h2 className="mg-title">{children}</h2></Reveal>;
 }
 
@@ -84,7 +84,7 @@ export default function MomenGrupDemoPage() {
       <section id="anggota" className="mg-wrap mg-section">
         <Heading label="01 / Orang-orangnya">Bukan geng paling ramai.<br />Tapi selalu ada.</Heading>
         <p className="mt-5 max-w-xl text-sm leading-7 text-muted-foreground">Satu suka merencanakan, satu suka mendengarkan. Satu menyimpan foto, satu memilih lagu. Entah bagaimana, semuanya pas kalau duduk bersama.</p>
-        <div className="mt-9 grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-4">{anggotaGrup.map((a) => <article className="mg-member" key={a.id}><div className={`mg-portrait ${a.posisi}`}><img src={grupMeta.foto} alt={`Foto ${a.nama}`} loading="lazy" /></div><div className="p-5"><h3>{a.nama}</h3><p className="mg-member-label mt-1">{a.julukan}</p><p className="mt-4 text-xs leading-6 text-muted-foreground">{a.kebiasaan}</p><p className="mt-4 border-t border-border pt-4 text-sm italic leading-6">“{a.quote}”</p></div></article>)}</div>
+        <div className="mt-9 grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-4">{anggotaGrup.map((a) => <article className="mg-member" key={a.id}><div className="mg-portrait"><img src={a.foto} alt={`Foto ${a.nama}`} loading="lazy" /></div><div className="p-5"><h3>{a.nama}</h3><p className="mg-member-label mt-1">{a.julukan}</p><p className="mt-4 text-xs leading-6 text-muted-foreground">{a.kebiasaan}</p><p className="mt-4 border-t border-border pt-4 text-sm italic leading-6">“{a.quote}”</p></div></article>)}</div>
       </section>
       <Album />
       <section id="cerita" className="mg-story-band"><div className="mg-wrap mg-section"><Heading label="03 / Dari dulu sampai sekarang">Kita nggak langsung sedekat ini.</Heading><ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">{ceritaGrup.map((c) => <li key={c.tahun} className="border-t border-primary/30 pt-5"><p className="mg-serif text-4xl text-primary">{c.tahun}</p><h3 className="mt-5 text-lg font-semibold leading-6">{c.judul}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{c.teks}</p></li>)}</ol><p className="mg-hand mt-10 text-3xl text-primary">Ada yang berubah. Ada yang tetap: kita.</p></div></section>
