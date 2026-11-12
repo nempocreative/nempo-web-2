@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
-import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, Mic2, Pause, Play, Send, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, Mic2, Pause, Play, Send } from 'lucide-react';
 import { Layout } from '@/components/layout';
 import { SEO } from '@/components/seo';
 import { Button } from '@/components/ui/button';
@@ -74,7 +74,7 @@ function Pesan() {
   }
   return <section id="pesan" className="me-wrap me-section border-t border-border"><Heading label="07 / Dinding pesan">Untuk yang datang, <em>dan yang bekerja di belakang.</em></Heading><div className="mt-10 grid items-start gap-10 lg:grid-cols-[.8fr_1.2fr]">
     <form onSubmit={submit} className="space-y-5"><div><label htmlFor="event-nama" className="mb-2 block text-sm font-semibold">Namamu</label><Input id="event-nama" value={nama} onChange={e => setNama(e.target.value)} maxLength={WALL_NAME_MAX} placeholder="Pengunjung, penampil, atau panitia" className="bg-card" /></div><div><label htmlFor="event-pesan" className="mb-2 block text-sm font-semibold">Pesan untuk Festival Lembah Senja</label><textarea id="event-pesan" value={teks} onChange={e => setTeks(e.target.value)} maxLength={WALL_TEXT_MAX} rows={4} placeholder="Momen yang paling aku ingat…" className="w-full rounded-md border border-input bg-card px-3 py-3 text-sm leading-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" /><p className="mt-1 text-right text-xs text-muted-foreground">{teks.length}/{WALL_TEXT_MAX}</p></div>{error && <p role="alert" className="text-sm text-destructive">{error}</p>}<Button type="submit"><Send className="size-4" />Kirim ke dinding</Button>{sent && <p role="status" className="text-sm text-primary">Pesanmu sudah tampil di dinding ini.</p>}<p className="max-w-sm text-xs leading-5 text-muted-foreground">Pesan hanya tampil selama halaman ini terbuka; belum tersimpan atau dikirim ke panitia.</p></form>
-    <div className="grid gap-4 sm:grid-cols-2" aria-live="polite">{notes.map((n, i) => <blockquote key={`${n.dari}-${i}`} className="me-note"><Sparkles className="mb-3 size-4 text-primary" /><p>{n.teks}</p><footer className="me-mono mt-4 text-xs text-muted-foreground">— {n.dari}</footer></blockquote>)}</div></div></section>;
+    <div className="grid gap-4 sm:grid-cols-2" aria-live="polite">{notes.map((n, i) => <blockquote key={`${n.dari}-${i}`} className="me-note"><p>{n.teks}</p><footer className="me-mono mt-4 text-xs text-muted-foreground">— {n.dari}</footer></blockquote>)}</div></div></section>;
 }
 
 export default function MomenEventDemoPage() {
