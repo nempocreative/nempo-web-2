@@ -30,6 +30,7 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Architecture rules
+- Public community applications must pass database-side field validation; site settings are admin-only, and public ticket reads require both an active ticket and an active parent event; why: direct Data API requests must not bypass form validation or reveal unpublished records.
 - Friendship moment portfolios use browser-safe data, a scoped global CSS theme, a dedicated metadata leaf route mounting NempoShell, and the shared wall-message validator with session-only messages; why: category links, full albums, and honest preview submissions stay consistent without backend writes.
 - Interactive yearbook memories use a focused browser-only UI and shared tested helpers; time capsules persist only in local device storage with downloadable backups, and sample farewell video uses the existing AI school photos; why: examples must work without pretending to send private letters or provide real class footage.
 - Personal yearbook features use shared tested voting and quiz helpers; demo votes stay device-local, dream groups reference existing student aspirations, and Story cards are drawn on a canvas (`src/lib/story-card-canvas.ts`, loaded lazily) whose PNG is both the preview and the download; why: keep sample content honest, keep browser-only code out of SSR, and make the saved file match the preview on every browser including iOS.
