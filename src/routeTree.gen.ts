@@ -28,6 +28,7 @@ import { Route as YearBookEventRouteImport } from './routes/year-book.event'
 import { Route as YearBookGengGrupRouteImport } from './routes/year-book.geng-grup'
 import { Route as YearBookKomunitasRouteImport } from './routes/year-book.komunitas'
 import { Route as YearBookOrganisasiRouteImport } from './routes/year-book.organisasi'
+import { Route as YearBookUcapanSpesialRouteImport } from './routes/year-book.ucapan-spesial'
 import { Route as WeddingInvitationTemaBiruTamanRouteImport } from './routes/wedding-invitation.tema.biru-taman'
 import { Route as WeddingInvitationTemaBiruTamanTanpaFotoRouteImport } from './routes/wedding-invitation.tema.biru-taman-tanpa-foto'
 import { Route as WeddingInvitationTemaHitamMewahRouteImport } from './routes/wedding-invitation.tema.hitam-mewah'
@@ -137,6 +138,11 @@ const YearBookOrganisasiRoute = YearBookOrganisasiRouteImport.update({
   path: '/year-book/organisasi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const YearBookUcapanSpesialRoute = YearBookUcapanSpesialRouteImport.update({
+  id: '/year-book/ucapan-spesial',
+  path: '/year-book/ucapan-spesial',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WeddingInvitationTemaBiruTamanRoute =
   WeddingInvitationTemaBiruTamanRouteImport.update({
     id: '/tema/biru-taman',
@@ -235,6 +241,7 @@ export interface FileRoutesByFullPath {
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
   '/year-book/komunitas': typeof YearBookKomunitasRoute
   '/year-book/organisasi': typeof YearBookOrganisasiRoute
+  '/year-book/ucapan-spesial': typeof YearBookUcapanSpesialRoute
   '/cms/': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
   '/wedding-invitation/tema/biru-taman-tanpa-foto': typeof WeddingInvitationTemaBiruTamanTanpaFotoRoute
@@ -269,6 +276,7 @@ export interface FileRoutesByTo {
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
   '/year-book/komunitas': typeof YearBookKomunitasRoute
   '/year-book/organisasi': typeof YearBookOrganisasiRoute
+  '/year-book/ucapan-spesial': typeof YearBookUcapanSpesialRoute
   '/cms': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
   '/wedding-invitation/tema/biru-taman-tanpa-foto': typeof WeddingInvitationTemaBiruTamanTanpaFotoRoute
@@ -304,6 +312,7 @@ export interface FileRoutesById {
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
   '/year-book/komunitas': typeof YearBookKomunitasRoute
   '/year-book/organisasi': typeof YearBookOrganisasiRoute
+  '/year-book/ucapan-spesial': typeof YearBookUcapanSpesialRoute
   '/cms/': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
   '/wedding-invitation/tema/biru-taman-tanpa-foto': typeof WeddingInvitationTemaBiruTamanTanpaFotoRoute
@@ -340,6 +349,7 @@ export interface FileRouteTypes {
     | '/year-book/geng-grup'
     | '/year-book/komunitas'
     | '/year-book/organisasi'
+    | '/year-book/ucapan-spesial'
     | '/cms/'
     | '/wedding-invitation/tema/biru-taman'
     | '/wedding-invitation/tema/biru-taman-tanpa-foto'
@@ -374,6 +384,7 @@ export interface FileRouteTypes {
     | '/year-book/geng-grup'
     | '/year-book/komunitas'
     | '/year-book/organisasi'
+    | '/year-book/ucapan-spesial'
     | '/cms'
     | '/wedding-invitation/tema/biru-taman'
     | '/wedding-invitation/tema/biru-taman-tanpa-foto'
@@ -408,6 +419,7 @@ export interface FileRouteTypes {
     | '/year-book/geng-grup'
     | '/year-book/komunitas'
     | '/year-book/organisasi'
+    | '/year-book/ucapan-spesial'
     | '/cms/'
     | '/wedding-invitation/tema/biru-taman'
     | '/wedding-invitation/tema/biru-taman-tanpa-foto'
@@ -443,6 +455,7 @@ export interface RootRouteChildren {
   YearBookGengGrupRoute: typeof YearBookGengGrupRoute
   YearBookKomunitasRoute: typeof YearBookKomunitasRoute
   YearBookOrganisasiRoute: typeof YearBookOrganisasiRoute
+  YearBookUcapanSpesialRoute: typeof YearBookUcapanSpesialRoute
   CmsIndexRoute: typeof CmsIndexRoute
 }
 
@@ -579,6 +592,13 @@ declare module '@tanstack/react-router' {
       path: '/year-book/organisasi'
       fullPath: '/year-book/organisasi'
       preLoaderRoute: typeof YearBookOrganisasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/year-book/ucapan-spesial': {
+      id: '/year-book/ucapan-spesial'
+      path: '/year-book/ucapan-spesial'
+      fullPath: '/year-book/ucapan-spesial'
+      preLoaderRoute: typeof YearBookUcapanSpesialRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/wedding-invitation/tema/biru-taman': {
@@ -736,6 +756,7 @@ const rootRouteChildren: RootRouteChildren = {
   YearBookGengGrupRoute: YearBookGengGrupRoute,
   YearBookKomunitasRoute: YearBookKomunitasRoute,
   YearBookOrganisasiRoute: YearBookOrganisasiRoute,
+  YearBookUcapanSpesialRoute: YearBookUcapanSpesialRoute,
   CmsIndexRoute: CmsIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -48,8 +48,10 @@
 .mus-env-seal { position: absolute; z-index: 4; left: 50%; top: 52%; translate: -50% -50%; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: hsl(var(--secondary)); color: hsl(var(--secondary-foreground)); box-shadow: 0 4px 0 hsl(var(--foreground) / .15); transition: opacity .3s; }
 .mus-envelope[data-open='true'] .mus-env-flap { transform: rotateX(180deg); z-index: 1; }
 .mus-envelope[data-open='true'] .mus-env-letter { transform: translateY(-46%); }
+.mus-env-letter > * { opacity: 0; transition: opacity .3s ease .45s; }
+.mus-envelope[data-open='true'] .mus-env-letter > * { opacity: 1; }
 .mus-envelope[data-open='true'] .mus-env-seal { opacity: 0; }
-.mus-to { position: absolute; z-index: 4; left: 0; right: 0; bottom: 14%; text-align: center; color: hsl(var(--primary-foreground)); }
+.mus-to { margin-top: 18px; text-align: center; color: hsl(var(--muted-foreground)); }
 .mus-page[data-tema='wisuda'] .mus-env-letter { color: hsl(224 42% 14%); }
 
 .mus-reveal { animation: mus-in .7s ease both; }
@@ -66,14 +68,15 @@
 .mus-page[data-tema='sahabat'] .mus-hero h1 { font-size: 66px; }
 
 /* Letter */
-.mus-letter { max-width: 760px; margin-inline: auto; background: repeating-linear-gradient(180deg, transparent 0 35px, hsl(var(--mus-line)) 35px 36px), hsl(var(--mus-paper)); color: hsl(345 30% 18%); border-radius: 8px; padding: 46px 52px; box-shadow: 0 24px 50px -34px hsl(var(--foreground) / .6); position: relative; }
+.mus-letter { max-width: 760px; margin-inline: auto; background: repeating-linear-gradient(180deg, transparent 0 35px, hsl(var(--mus-line)) 35px 36px), hsl(var(--mus-paper)); color: hsl(345 30% 18%); border-radius: 8px; padding: 36px 52px 40px; box-shadow: 0 24px 50px -34px hsl(var(--foreground) / .6); position: relative; }
 .mus-page[data-tema='sahabat'] .mus-letter { color: hsl(222 45% 16%); }
 .mus-page[data-tema='wisuda'] .mus-letter { color: hsl(224 42% 14%); }
 .mus-letter p { font-size: 17px; line-height: 36px; }
-.mus-letter p + p { margin-top: 18px; }
-.mus-sign { font-family: 'Caveat', cursive; font-size: 40px; line-height: 1; margin-top: 8px; color: hsl(346 62% 46%); }
-.mus-page[data-tema='sahabat'] .mus-sign { color: hsl(222 70% 45%); }
-.mus-page[data-tema='wisuda'] .mus-sign { color: hsl(30 60% 38%); }
+.mus-letter p + p { margin-top: 0; text-indent: 2em; }
+.mus-letter .mus-penutup { margin-top: 36px; text-indent: 0; }
+.mus-letter .mus-sign { font-family: 'Caveat', cursive; font-size: 40px; line-height: 72px; text-indent: 0; color: hsl(346 62% 46%); }
+.mus-page[data-tema='sahabat'] .mus-letter .mus-sign { color: hsl(222 70% 45%); }
+.mus-page[data-tema='wisuda'] .mus-letter .mus-sign { color: hsl(30 60% 38%); }
 
 /* Flip cards */
 .mus-reasons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -90,6 +93,7 @@
 .mus-memory { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: center; }
 .mus-memory:nth-child(even) img { order: 2; }
 .mus-memory img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; }
+.mus-memory-solo { grid-template-columns: 1fr; justify-items: center; text-align: center; }
 .mus-memory-note { background: hsl(var(--card)); border: 1px dashed hsl(var(--border)); border-radius: 16px; padding: 28px; max-width: 620px; }
 
 /* Interactive moment */
@@ -131,9 +135,13 @@
 @media (max-width: 640px) {
   .mus-wrap { padding-inline: 18px; } .mus-section { padding-block: 52px; } .mus-title { font-size: 34px; }
   .mus-bar-back span { display: none; }
+  .mus-bar-inner { gap: 6px; padding-inline: 10px; }
+  .mus-switch { flex: 1; gap: 4px; }
+  .mus-switch button { flex: 1; padding-inline: 6px; font-size: 12px; }
+  .mus-stage { min-height: calc(100svh - 62px); padding-top: 28px; }
   .mus-hero { padding-block: 40px 20px; }
   .mus-hero h1 { font-size: 48px; } .mus-page[data-tema='sahabat'] .mus-hero h1 { font-size: 38px; }
-  .mus-letter { padding: 32px 22px; } .mus-letter p { font-size: 16px; }
+  .mus-letter { padding: 36px 22px 32px; } .mus-letter p { font-size: 16px; }
   .mus-reasons { grid-template-columns: 1fr 1fr; gap: 10px; } .mus-flip { height: 170px; } .mus-flip-face { padding: 14px; }
   .mus-moment { padding: 28px 18px; }
 }

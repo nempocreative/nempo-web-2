@@ -93,7 +93,8 @@ const momenKategori = [
     icon: Gift,
     nama: "Ucapan Spesial",
     ringkas: "Halaman ucapan untuk satu orang: ulang tahun pacar atau teman, graduation, dan momen pribadi lainnya.",
-    status: "Segera hadir",
+    status: "Sudah bisa dilihat",
+    href: "/year-book/ucapan-spesial",
   },
 ];
 
@@ -191,7 +192,7 @@ export default function YearBookPage() {
               Satu konsep, banyak bentuk.
             </h2>
             <p className="mt-3 text-sm leading-6" style={{ color: INK_SOFT }}>
-              Year book, Kelas, Geng & Grup, Organisasi, Event, dan Komunitas sudah bisa dilihat contohnya. Kategori lain menyusul —
+              Year book, Kelas, Geng & Grup, Organisasi, Event, Komunitas, dan Ucapan Spesial sudah bisa dilihat contohnya. Kategori lain menyusul —
               kalau kelompokmu butuh duluan, ceritakan saja ke Nempo.
             </p>
           </Reveal>

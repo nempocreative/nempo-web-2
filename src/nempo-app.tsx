@@ -102,6 +102,7 @@ const MomenGrupDemoPage = lazyWithRetry(() => import("@/pages/momen-grup-demo"))
 const MomenOrganisasiDemoPage = lazyWithRetry(() => import("@/pages/momen-organisasi-demo"));
 const MomenEventDemoPage = lazyWithRetry(() => import("@/pages/momen-event-demo"));
 const MomenKomunitasDemoPage = lazyWithRetry(() => import("@/pages/momen-komunitas-demo"));
+const UcapanSpesialDemoPage = lazyWithRetry(() => import("@/pages/ucapan-spesial-demo"));
 const SettingsPage = lazyWithRetry(() => import("@/pages/settings"));
 const ItineraryPage = lazyWithRetry(() => import("@/pages/itinerary"));
 const ItineraryComingSoonPage = lazyWithRetry(() => import("@/pages/itinerary-coming-soon"));
@@ -215,6 +216,7 @@ function Router() {
       <Route path="/year-book/organisasi" component={MomenOrganisasiDemoPage} />
       <Route path="/year-book/event" component={MomenEventDemoPage} />
       <Route path="/year-book/komunitas" component={MomenKomunitasDemoPage} />
+      <Route path="/year-book/ucapan-spesial" component={UcapanSpesialDemoPage} />
       <Route path="/year-book" component={YearBookPage} />
       <Route path="/contact" component={ContactPage} />
       
