@@ -15,6 +15,13 @@
       "when": 1794467457514,
       "tag": "0001_yearbook_photo_submissions",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794469540669,
+      "tag": "0002_restrict_selected_public_access_policies",
+      "breakpoints": true
     }
   ]
 }
