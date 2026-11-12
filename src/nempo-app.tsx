@@ -39,6 +39,7 @@ const RentCarPage = lazyWithRetry(() => import("@/pages/rent-car"));
 const KomunitasPage = lazyWithRetry(() => import("@/pages/komunitas"));
 const RecruitmentPage = lazyWithRetry(() => import("@/pages/recruitment"));
 const PortofolioPage = lazyWithRetry(() => import("@/pages/portofolio"));
+const ProgramPage = lazyWithRetry(() => import("@/pages/program"));
 const ContactPage = lazyWithRetry(() => import("@/pages/contact"));
 const AdventureGearPage = lazyWithRetry(() => import("@/pages/adventure-gear"));
 const KamusSundaPage = lazyWithRetry(() => import("@/pages/kamus-sunda"));
@@ -207,6 +208,7 @@ function Router() {
       <Route path="/komunitas" component={KomunitasPage} />
       <Route path="/recruitment" component={RecruitmentPage} />
       <Route path="/portofolio" component={PortofolioPage} />
+      <Route path="/program" component={ProgramPage} />
       <Route path="/year-book/contoh">
         <Redirect to="/year-book/2026" />
       </Route>

@@ -141,6 +141,17 @@ function ServiceArt({ id }: ServiceArtProps) {
           <path d="m14 12 1.2 3 3 1.2-3 1.3-1.2 3-1.3-3-3-1.3 3-1.2 1.3-3Z" fill={gold} stroke={outline} strokeWidth="1" />
         </>
       );
+    case "program":
+      return (
+        <>
+          <ellipse cx="32" cy="57" rx="17" ry="3" fill="#0F766E" opacity=".18" />
+          <rect x="13" y="15" width="38" height="36" rx="6" fill={cream} stroke={outline} strokeWidth="2.1" />
+          <path d="M13 25h38" stroke={outline} strokeWidth="2" />
+          <path d="M23 11v8M41 11v8" stroke={outline} strokeWidth="2.4" strokeLinecap="round" />
+          <path d="M21 33h8M21 41h14" stroke="#0F766E" strokeWidth="2.6" strokeLinecap="round" />
+          <circle cx="42" cy="38" r="4" fill={gold} stroke={outline} strokeWidth="1.2" />
+        </>
+      );
     default:
       return null;
   }
