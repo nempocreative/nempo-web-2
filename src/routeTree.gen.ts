@@ -26,6 +26,7 @@ import { Route as CmsIndexRouteImport } from './routes/cms.index'
 import { Route as CmsSplatRouteImport } from './routes/cms.$'
 import { Route as YearBookEventRouteImport } from './routes/year-book.event'
 import { Route as YearBookGengGrupRouteImport } from './routes/year-book.geng-grup'
+import { Route as YearBookKomunitasRouteImport } from './routes/year-book.komunitas'
 import { Route as YearBookOrganisasiRouteImport } from './routes/year-book.organisasi'
 import { Route as WeddingInvitationTemaBiruTamanRouteImport } from './routes/wedding-invitation.tema.biru-taman'
 import { Route as WeddingInvitationTemaBiruTamanTanpaFotoRouteImport } from './routes/wedding-invitation.tema.biru-taman-tanpa-foto'
@@ -124,6 +125,11 @@ const YearBookEventRoute = YearBookEventRouteImport.update({
 const YearBookGengGrupRoute = YearBookGengGrupRouteImport.update({
   id: '/year-book/geng-grup',
   path: '/year-book/geng-grup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const YearBookKomunitasRoute = YearBookKomunitasRouteImport.update({
+  id: '/year-book/komunitas',
+  path: '/year-book/komunitas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const YearBookOrganisasiRoute = YearBookOrganisasiRouteImport.update({
@@ -227,6 +233,7 @@ export interface FileRoutesByFullPath {
   '/cms/$': typeof CmsSplatRoute
   '/year-book/event': typeof YearBookEventRoute
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
+  '/year-book/komunitas': typeof YearBookKomunitasRoute
   '/year-book/organisasi': typeof YearBookOrganisasiRoute
   '/cms/': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
@@ -260,6 +267,7 @@ export interface FileRoutesByTo {
   '/cms/$': typeof CmsSplatRoute
   '/year-book/event': typeof YearBookEventRoute
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
+  '/year-book/komunitas': typeof YearBookKomunitasRoute
   '/year-book/organisasi': typeof YearBookOrganisasiRoute
   '/cms': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
@@ -294,6 +302,7 @@ export interface FileRoutesById {
   '/cms/$': typeof CmsSplatRoute
   '/year-book/event': typeof YearBookEventRoute
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
+  '/year-book/komunitas': typeof YearBookKomunitasRoute
   '/year-book/organisasi': typeof YearBookOrganisasiRoute
   '/cms/': typeof CmsIndexRoute
   '/wedding-invitation/tema/biru-taman': typeof WeddingInvitationTemaBiruTamanRoute
@@ -329,6 +338,7 @@ export interface FileRouteTypes {
     | '/cms/$'
     | '/year-book/event'
     | '/year-book/geng-grup'
+    | '/year-book/komunitas'
     | '/year-book/organisasi'
     | '/cms/'
     | '/wedding-invitation/tema/biru-taman'
@@ -362,6 +372,7 @@ export interface FileRouteTypes {
     | '/cms/$'
     | '/year-book/event'
     | '/year-book/geng-grup'
+    | '/year-book/komunitas'
     | '/year-book/organisasi'
     | '/cms'
     | '/wedding-invitation/tema/biru-taman'
@@ -395,6 +406,7 @@ export interface FileRouteTypes {
     | '/cms/$'
     | '/year-book/event'
     | '/year-book/geng-grup'
+    | '/year-book/komunitas'
     | '/year-book/organisasi'
     | '/cms/'
     | '/wedding-invitation/tema/biru-taman'
@@ -429,6 +441,7 @@ export interface RootRouteChildren {
   CmsSplatRoute: typeof CmsSplatRoute
   YearBookEventRoute: typeof YearBookEventRoute
   YearBookGengGrupRoute: typeof YearBookGengGrupRoute
+  YearBookKomunitasRoute: typeof YearBookKomunitasRoute
   YearBookOrganisasiRoute: typeof YearBookOrganisasiRoute
   CmsIndexRoute: typeof CmsIndexRoute
 }
@@ -552,6 +565,13 @@ declare module '@tanstack/react-router' {
       path: '/year-book/geng-grup'
       fullPath: '/year-book/geng-grup'
       preLoaderRoute: typeof YearBookGengGrupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/year-book/komunitas': {
+      id: '/year-book/komunitas'
+      path: '/year-book/komunitas'
+      fullPath: '/year-book/komunitas'
+      preLoaderRoute: typeof YearBookKomunitasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/year-book/organisasi': {
@@ -714,6 +734,7 @@ const rootRouteChildren: RootRouteChildren = {
   CmsSplatRoute: CmsSplatRoute,
   YearBookEventRoute: YearBookEventRoute,
   YearBookGengGrupRoute: YearBookGengGrupRoute,
+  YearBookKomunitasRoute: YearBookKomunitasRoute,
   YearBookOrganisasiRoute: YearBookOrganisasiRoute,
   CmsIndexRoute: CmsIndexRoute,
 }
