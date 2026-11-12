@@ -1,7 +1,7 @@
 # Roadmap
 
 - [ ] Portofolio contoh untuk kategori Momen Digital (seperti yearbook):
-  - [ ] Kelas — sedang dikerjakan (halaman demo + data + rute + kartu kategori aktif)
+  - [x] Kelas — halaman contoh di /year-book/kelas, kartu kategori sudah aktif
   - [ ] Geng & Grup
   - [ ] Organisasi
   - [ ] Event
