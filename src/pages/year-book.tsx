@@ -5,9 +5,13 @@ import { NEMPO_CONSULT_URL } from "@/lib/contact";
 import {
   ArrowRight,
   BookOpen,
+  CalendarDays,
   Camera,
+  Flag,
   GraduationCap,
+  Heart,
   MessageCircle,
+  School,
   Users,
 } from "lucide-react";
 import {
@@ -39,6 +43,46 @@ const stats = [
   { n: kelasList.length, l: "Kelas" },
   { n: moments.length, l: "Momen" },
   { n: teacherMessages.length + wallNotes.length, l: "Pesan" },
+];
+
+const momenKategori = [
+  {
+    icon: GraduationCap,
+    nama: "Year Book",
+    ringkas: "Buku tahunan satu angkatan: profil lulusan, galeri momen, pesan guru, dan dinding pesan.",
+    status: "Sudah bisa dilihat",
+    href: yearBookMeta.halamanBuku,
+  },
+  {
+    icon: School,
+    nama: "Kelas",
+    ringkas: "Versi kecil untuk satu kelas: wali kelas, daftar siswa, momen sehari-hari, dan pesan antarteman.",
+    status: "Segera hadir",
+  },
+  {
+    icon: Heart,
+    nama: "Geng & Grup",
+    ringkas: "Halaman kenangan satu circle: foto hangout, playlist bareng, dan pesan satu sama lain.",
+    status: "Segera hadir",
+  },
+  {
+    icon: Flag,
+    nama: "Organisasi",
+    ringkas: "Dokumentasi satu periode kepengurusan: pengurus, program kerja, dan pesan penutup pembina.",
+    status: "Segera hadir",
+  },
+  {
+    icon: CalendarDays,
+    nama: "Event",
+    ringkas: "After-movie digital satu acara: galeri foto terbaik, video dokumentasi, dan daftar panitia.",
+    status: "Segera hadir",
+  },
+  {
+    icon: Users,
+    nama: "Komunitas",
+    ringkas: "Rayakan anniversary atau momen besar komunitas: sejarah, anggota, dan capaian setahun.",
+    status: "Segera hadir",
+  },
 ];
 
 export default function YearBookPage() {
