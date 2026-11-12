@@ -10,4 +10,4 @@
   - [x] Ucapan Spesial — /year-book/ucapan-spesial: pacar, sahabat, wisuda; amplop, surat, kartu balik, kenangan, lilin/toga, ucapan teman
   - [x] Kartu Ucapan Spesial di halaman Momen Digital aktif ("Sudah bisa dilihat")
 
-- [ ] Ucapan Spesial: foto muncul lebih cepat setelah amplop dibuka
+- [x] Ucapan Spesial: foto muncul lebih cepat setelah amplop dibuka
