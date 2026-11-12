@@ -6,5 +6,5 @@
   - [x] Perbaikan Geng & Grup — cerita lebih personal dan satu rangkaian foto AI wajah Indonesia
   - [x] Organisasi — contoh lengkap dengan foto AI Indonesia, pengurus, program, linimasa, album, dan pesan
   - [x] Event — /year-book/event: festival rekaan, cuplikan foto, susunan acara, persiapan, panitia (foto satu-satu), galeri, pesan
-  - [ ] Komunitas
+  - [x] Komunitas — /year-book/komunitas: komunitas sepeda rekaan 5 tahun, perjalanan anggota per tahun, agenda, penggerak (foto satu-satu), rute, album, pesan
   - [ ] Ucapan Spesial

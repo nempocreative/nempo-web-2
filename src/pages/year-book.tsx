@@ -86,7 +86,8 @@ const momenKategori = [
     icon: Users,
     nama: "Komunitas",
     ringkas: "Rayakan anniversary atau momen besar komunitas: sejarah, anggota, dan capaian setahun.",
-    status: "Segera hadir",
+    status: "Sudah bisa dilihat",
+    href: "/year-book/komunitas",
   },
   {
     icon: Gift,
@@ -190,7 +191,7 @@ export default function YearBookPage() {
               Satu konsep, banyak bentuk.
             </h2>
             <p className="mt-3 text-sm leading-6" style={{ color: INK_SOFT }}>
-              Year book, Kelas, Geng & Grup, Organisasi, dan Event sudah bisa dilihat contohnya. Kategori lain menyusul —
+              Year book, Kelas, Geng & Grup, Organisasi, Event, dan Komunitas sudah bisa dilihat contohnya. Kategori lain menyusul —
               kalau kelompokmu butuh duluan, ceritakan saja ke Nempo.
             </p>
           </Reveal>
