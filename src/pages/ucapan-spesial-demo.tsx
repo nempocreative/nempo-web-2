@@ -1,11 +1,12 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
-import { ArrowLeft, Heart, MailOpen, RotateCcw, Send } from 'lucide-react';
+import { ArrowLeft, Bookmark, Check, ChevronLeft, ChevronRight, Copy, Download, Globe, Heart, LayoutGrid, MailOpen, MessageCircle, RotateCcw, Send } from 'lucide-react';
 import { Layout } from '@/components/layout';
 import { SEO } from '@/components/seo';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link } from '@/lib/wouter';
 import { Reveal } from '@/lib/yearbook-motion';
+import { AKUN_FEED, JUMLAH_SLIDE, captionFeed, geserSlide, namaFileFeed } from '@/data/ucapan-feed';
 import { WALL_NAME_MAX, WALL_TEXT_MAX, type WallNote } from '@/data/year-book';
 import {
   JUMLAH_LILIN, buatPesanUcapan, isiSurat, semuaLilinPadam, ucapanSpesial, type JenisUcapan, type Ucapan,
@@ -164,22 +165,105 @@ function IsiUcapan({ ucapan }: { ucapan: Ucapan }) {
   </div>;
 }
 
+function DesainFeed({ ucapan }: { ucapan: Ucapan }) {
+  const [urls, setUrls] = useState<string[]>([]);
+  const [gagal, setGagal] = useState(false);
+  const [aktif, setAktif] = useState(0);
+  const [tersalin, setTersalin] = useState(false);
+  const [sentuh, setSentuh] = useState<number | null>(null);
+  const caption = captionFeed(ucapan);
+  const akun = AKUN_FEED[ucapan.id];
+
+  useEffect(() => {
+    let batal = false; const dibuat: string[] = [];
+    setUrls([]); setGagal(false); setAktif(0);
+    import('@/lib/ucapan-feed-canvas').then(async ({ renderFeedSlide }) => {
+      for (let i = 0; i < JUMLAH_SLIDE; i++) {
+        const blob = await renderFeedSlide(ucapan, i);
+        if (batal) return;
+        const url = URL.createObjectURL(blob); dibuat.push(url);
+        setUrls(prev => [...prev, url]);
+      }
+    }).catch(() => { if (!batal) setGagal(true); });
+    return () => { batal = true; dibuat.forEach(u => URL.revokeObjectURL(u)); };
+  }, [ucapan]);
+
+  function unduh(i: number) {
+    const url = urls[i]; if (!url) return;
+    const a = document.createElement('a'); a.href = url; a.download = namaFileFeed(ucapan, i); document.body.appendChild(a); a.click(); a.remove();
+  }
+  function unduhSemua() { urls.forEach((_, i) => window.setTimeout(() => unduh(i), i * 400)); }
+  async function salin() {
+    try { await navigator.clipboard.writeText(caption); setTersalin(true); window.setTimeout(() => setTersalin(false), 2000); } catch { setTersalin(false); }
+  }
+  const siap = urls.length === JUMLAH_SLIDE;
+  const geser = (arah: number) => setAktif(i => geserSlide(i, arah));
+
+  return <section className="mus-wrap mus-section mus-reveal">
+    <div className="mus-feed">
+      <article className="mus-post" aria-label={`Contoh postingan feed untuk ${ucapan.penerima}`}>
+        <header className="mus-post-head">
+          <span className="mus-post-avatar"><img src={ucapan.foto} alt="" width={40} height={40} /></span>
+          <span className="min-w-0"><span className="block truncate text-sm font-bold">{akun}</span><span className="block text-xs text-muted-foreground">Garut</span></span>
+        </header>
+        <div className="mus-post-media" onTouchStart={e => setSentuh(e.touches[0]?.clientX ?? null)}
+          onTouchEnd={e => { const x = e.changedTouches[0]?.clientX; if (sentuh !== null && x !== undefined && Math.abs(x - sentuh) > 40) geser(x < sentuh ? 1 : -1); setSentuh(null); }}>
+          {urls[aktif] ? <img src={urls[aktif]} alt={`Slide ${aktif + 1} dari ${JUMLAH_SLIDE}: ucapan untuk ${ucapan.penerima}`} width={1080} height={1350} />
+            : <div className="mus-post-wait">{gagal ? 'Gambar belum bisa dibuat di perangkat ini.' : 'Menyiapkan desain…'}</div>}
+          <span className="mus-post-count">{aktif + 1}/{JUMLAH_SLIDE}</span>
+          <button type="button" className="mus-post-nav mus-post-prev" onClick={() => geser(-1)} aria-label="Slide sebelumnya"><ChevronLeft className="size-5" /></button>
+          <button type="button" className="mus-post-nav mus-post-next" onClick={() => geser(1)} aria-label="Slide berikutnya"><ChevronRight className="size-5" /></button>
+        </div>
+        <div className="mus-post-actions">
+          <span className="flex gap-4" aria-hidden="true"><Heart className="size-6" /><MessageCircle className="size-6" /><Send className="size-6" /></span>
+          <span className="mus-post-dots" aria-hidden="true">{Array.from({ length: JUMLAH_SLIDE }, (_, i) => <span key={i} data-on={i === aktif} />)}</span>
+          <Bookmark className="size-6" aria-hidden="true" />
+        </div>
+        <p className="mus-post-caption"><b>{akun}</b> {caption}</p>
+      </article>
+
+      <div>
+        <p className="mus-label">Versi feed Instagram</p>
+        <h2 className="mus-title">Ucapan yang sama, siap diunggah</h2>
+        <p className="mt-5 leading-7 text-muted-foreground">Tiga slide berukuran 1080 × 1350 untuk feed: sampul dengan foto, potongan surat, lalu hal-hal kecil tentang {ucapan.penerima}. Geser fotonya atau pilih slide di bawah.</p>
+        <div className="mus-feed-thumbs mt-6" role="group" aria-label="Pilih slide">
+          {Array.from({ length: JUMLAH_SLIDE }, (_, i) => <button key={i} type="button" aria-pressed={i === aktif} aria-label={`Lihat slide ${i + 1}`} onClick={() => setAktif(i)}>
+            {urls[i] ? <img src={urls[i]} alt="" width={1080} height={1350} /> : <span />}
+          </button>)}
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Button onClick={() => unduh(aktif)} disabled={!urls[aktif]}><Download className="size-4" />Unduh slide {aktif + 1}</Button>
+          <Button variant="outline" onClick={unduhSemua} disabled={!siap}><Download className="size-4" />Unduh semua ({JUMLAH_SLIDE})</Button>
+          <Button variant="outline" onClick={salin}>{tersalin ? <Check className="size-4" /> : <Copy className="size-4" />}{tersalin ? 'Caption tersalin' : 'Salin caption'}</Button>
+        </div>
+        <p className="mt-4 max-w-md text-xs leading-5 text-muted-foreground">Gambar dibuat langsung di perangkatmu dan tidak diunggah ke mana pun.</p>
+      </div>
+    </div>
+  </section>;
+}
+
 export default function UcapanSpesialDemoPage() {
   const [jenis, setJenis] = useState<JenisUcapan>('pacar');
   const [dibuka, setDibuka] = useState(false);
+  const [format, setFormat] = useState<'situs' | 'feed'>('situs');
   const ucapan = ucapanSpesial.find(u => u.id === jenis) ?? ucapanSpesial[0];
   function pilih(id: JenisUcapan) {
     if (id === jenis) return;
     setJenis(id); setDibuka(false); window.scrollTo({ top: 0 });
   }
   return <Layout minimalChrome hideBottomNav>
-    <SEO title="Ucapan Spesial — Momen Digital Nempo" description="Contoh halaman ucapan untuk satu orang: ulang tahun pacar, ulang tahun sahabat, dan wisuda — lengkap dengan surat, kenangan, dan ucapan dari teman." path="/year-book/ucapan-spesial" />
+    <SEO title="Ucapan Spesial — Momen Digital Nempo" description="Contoh ucapan untuk satu orang — ulang tahun pacar, sahabat, dan wisuda — dalam bentuk situs maupun desain feed Instagram." path="/year-book/ucapan-spesial" />
     <main className="mus-page min-h-screen overflow-x-clip" data-tema={ucapan.id}>
       <nav className="mus-bar" aria-label="Pilih contoh ucapan"><div className="mus-wrap mus-bar-inner">
         <Button asChild variant="ghost" size="sm" className="mus-bar-back"><Link href="/year-book"><ArrowLeft className="size-4" /><span>Momen Digital</span></Link></Button>
+        <div className="mus-format" role="group" aria-label="Pilih format">
+          <button type="button" aria-pressed={format === 'situs'} onClick={() => { setFormat('situs'); window.scrollTo({ top: 0 }); }}><Globe className="size-4" />Situs</button>
+          <button type="button" aria-pressed={format === 'feed'} onClick={() => { setFormat('feed'); window.scrollTo({ top: 0 }); }}><LayoutGrid className="size-4" />Desain feed</button>
+        </div>
         <div className="mus-switch" role="group" aria-label="Contoh ucapan">{ucapanSpesial.map(u => <Button key={u.id} size="sm" variant={u.id === jenis ? 'default' : 'outline'} aria-pressed={u.id === jenis} onClick={() => pilih(u.id)}>{u.label}</Button>)}</div>
       </div></nav>
-      {dibuka ? <IsiUcapan key={ucapan.id} ucapan={ucapan} /> : <Amplop key={ucapan.id} ucapan={ucapan} onOpen={() => setDibuka(true)} />}
+      {format === 'feed' ? <DesainFeed key={ucapan.id} ucapan={ucapan} />
+        : dibuka ? <IsiUcapan key={ucapan.id} ucapan={ucapan} /> : <Amplop key={ucapan.id} ucapan={ucapan} onOpen={() => setDibuka(true)} />}
     </main>
   </Layout>;
 }
