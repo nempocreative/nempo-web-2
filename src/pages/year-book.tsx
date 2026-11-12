@@ -65,7 +65,8 @@ const momenKategori = [
     icon: Heart,
     nama: "Geng & Grup",
     ringkas: "Halaman kenangan satu circle: foto hangout, playlist bareng, dan pesan satu sama lain.",
-    status: "Segera hadir",
+    status: "Sudah bisa dilihat",
+    href: "/year-book/geng-grup",
   },
   {
     icon: Flag,
@@ -187,7 +188,7 @@ export default function YearBookPage() {
               Satu konsep, banyak bentuk.
             </h2>
             <p className="mt-3 text-sm leading-6" style={{ color: INK_SOFT }}>
-              Year book sudah bisa dilihat contohnya. Kategori lain menyusul —
+              Year book, Kelas, dan Geng & Grup sudah bisa dilihat contohnya. Kategori lain menyusul —
               kalau kelompokmu butuh duluan, ceritakan saja ke Nempo.
             </p>
           </Reveal>
