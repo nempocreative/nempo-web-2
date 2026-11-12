@@ -3,6 +3,7 @@
 @import "tw-animate-css";
 @import "./styles/momen-grup.css";
 @import "./styles/momen-organisasi.css";
+@import "./styles/momen-event.css";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));

@@ -4,7 +4,7 @@
   - [x] Kelas — halaman contoh di /year-book/kelas, kartu kategori sudah aktif
   - [x] Geng & Grup — /year-book/geng-grup: profil anggota, cerita, galeri, playlist, dan pesan
   - [x] Perbaikan Geng & Grup — cerita lebih personal dan satu rangkaian foto AI wajah Indonesia
-  - [ ] Organisasi — contoh lengkap dengan foto AI Indonesia, pengurus, program, linimasa, album, dan pesan
-  - [ ] Event
+  - [x] Organisasi — contoh lengkap dengan foto AI Indonesia, pengurus, program, linimasa, album, dan pesan
+  - [x] Event — /year-book/event: festival rekaan, cuplikan foto, susunan acara, persiapan, panitia (foto satu-satu), galeri, pesan
   - [ ] Komunitas
   - [ ] Ucapan Spesial

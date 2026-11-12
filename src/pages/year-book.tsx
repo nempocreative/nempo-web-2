@@ -79,7 +79,8 @@ const momenKategori = [
     icon: CalendarDays,
     nama: "Event",
     ringkas: "After-movie digital satu acara: galeri foto terbaik, video dokumentasi, dan daftar panitia.",
-    status: "Segera hadir",
+    status: "Sudah bisa dilihat",
+    href: "/year-book/event",
   },
   {
     icon: Users,
@@ -189,7 +190,7 @@ export default function YearBookPage() {
               Satu konsep, banyak bentuk.
             </h2>
             <p className="mt-3 text-sm leading-6" style={{ color: INK_SOFT }}>
-              Year book, Kelas, Geng & Grup, dan Organisasi sudah bisa dilihat contohnya. Kategori lain menyusul —
+              Year book, Kelas, Geng & Grup, Organisasi, dan Event sudah bisa dilihat contohnya. Kategori lain menyusul —
               kalau kelompokmu butuh duluan, ceritakan saja ke Nempo.
             </p>
           </Reveal>
