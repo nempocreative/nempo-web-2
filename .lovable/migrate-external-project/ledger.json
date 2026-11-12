@@ -1,23 +1,132 @@
 {
-  "source": "github:nempocreative/remix-of-remix-of-remix-of-remix-of-nempo-feed-migration-4",
+  "source": "github:nempocreative/nempo-web",
   "scope": "Full NEMPO Garut site: organizer website, /cms admin, NEMPO Feed, database and admin users",
   "capabilities": [
-    { "capability": "code: main site pages, CMS app, feed app", "source": "src/", "outcome": "migrate", "status": "verified", "next_action": "done" },
-    { "capability": "routes", "source": "src/routes", "outcome": "migrate", "status": "verified", "next_action": "done (/, /event, /event/musicomedy-night, /komunitas, /cms, /nempo-feed load without errors)" },
-    { "capability": "public files", "source": "public/", "outcome": "migrate", "status": "verified", "next_action": "done" },
-    { "capability": "media pointers (147 .asset.json)", "source": "src/assets", "outcome": "migrate", "status": "verified", "next_action": "done: re-uploaded into this project's storage; media-archive.json urls updated" },
-    { "capability": "schema (21 tables, app_role enum, has_role) + admin_allowlist", "source": "old generated types", "outcome": "migrate", "status": "verified", "next_action": "done: drizzle/migrations/0000 + 0001" },
-    { "capability": "records: required MusiComedy Night event", "source": "src/data/event-seed.ts", "outcome": "migrate", "status": "verified", "next_action": "done" },
-    { "capability": "records: all other content (wisata, kuliner, berita, banners, talents, ...)", "source": "old Lovable Cloud database (live site API returned 0 rows)", "outcome": "migrate", "status": "pending", "next_action": "owner exports tables as CSV/JSON from old project and attaches them" },
-    { "capability": "records: media_archive row", "source": "src/data/media-archive.json", "outcome": "migrate", "status": "pending", "next_action": "optional; repo JSON is the source of truth" },
-    { "capability": "auth identities (CMS admins)", "source": "old auth users + user_roles", "outcome": "migrate", "status": "pending", "next_action": "owner gives admin email(s); add to admin_allowlist; admin uses Aktifkan akun on /cms" },
-    { "capability": "authorization (admin via user_roles/has_role)", "source": "src/apps/cms", "outcome": "migrate", "status": "verified", "next_action": "done: test admin created/deleted a wisata row; visitors blocked from writes and private columns" },
-    { "capability": "public endpoints /api/*", "source": "src/routes/api", "outcome": "preserve", "status": "verified", "next_action": "done" },
-    { "capability": "public insert: community_applications", "source": "src/components/community-application-form.tsx", "outcome": "preserve", "status": "verified", "next_action": "done (visitor insert 201, read denied)" },
-    { "capability": "file uploads / storage", "source": "none (CMS uses image URLs)", "outcome": "not-applicable", "status": "verified", "next_action": "none" },
-    { "capability": "schedules / webhooks / external providers", "source": "none found", "outcome": "not-applicable", "status": "verified", "next_action": "none" },
-    { "capability": "hosting lock (feed/cms preview-only)", "source": "src/lib/hosting-lock.ts", "outcome": "preserve", "status": "verified", "next_action": "done (tests pass)" },
-    { "capability": "cutover (nempogarut.com domain)", "source": "published domain", "outcome": "pending", "status": "pending", "next_action": "after publish, owner moves the domain to this project" },
-    { "capability": "verification", "source": "-", "outcome": "verify", "status": "verified", "next_action": "build OK, 35 test files pass" }
+    {
+      "capability": "code: main site pages, CMS app, feed app",
+      "source": "src/",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "done"
+    },
+    {
+      "capability": "routes",
+      "source": "src/routes",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "done (/, /event, /event/musicomedy-night, /komunitas, /cms, /nempo-feed load without errors)"
+    },
+    {
+      "capability": "public files",
+      "source": "public/",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "done"
+    },
+    {
+      "capability": "media pointers (147 .asset.json)",
+      "source": "src/assets",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "done: re-uploaded into this project's storage; media-archive.json urls updated"
+    },
+    {
+      "capability": "schema (21 tables, app_role enum, has_role) + admin_allowlist",
+      "source": "old generated types",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "done: drizzle/migrations/0000 + 0001"
+    },
+    {
+      "capability": "records: required MusiComedy Night event",
+      "source": "src/data/event-seed.ts",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "done"
+    },
+    {
+      "capability": "records: all other content (wisata, kuliner, berita, banners, talents, ...)",
+      "source": "old Lovable Cloud database (live site API returned 0 rows)",
+      "outcome": "migrate",
+      "status": "pending",
+      "next_action": "owner exports tables as CSV/JSON from old project and attaches them"
+    },
+    {
+      "capability": "records: media_archive row",
+      "source": "src/data/media-archive.json",
+      "outcome": "migrate",
+      "status": "pending",
+      "next_action": "optional; repo JSON is the source of truth"
+    },
+    {
+      "capability": "auth identities (CMS admins)",
+      "source": "old auth users + user_roles",
+      "outcome": "migrate",
+      "status": "pending",
+      "next_action": "owner gives admin email(s); add to admin_allowlist; admin uses Aktifkan akun on /cms"
+    },
+    {
+      "capability": "authorization (admin via user_roles/has_role)",
+      "source": "src/apps/cms",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "done: test admin created/deleted a wisata row; visitors blocked from writes and private columns"
+    },
+    {
+      "capability": "public endpoints /api/*",
+      "source": "src/routes/api",
+      "outcome": "preserve",
+      "status": "verified",
+      "next_action": "done"
+    },
+    {
+      "capability": "public insert: community_applications",
+      "source": "src/components/community-application-form.tsx",
+      "outcome": "preserve",
+      "status": "verified",
+      "next_action": "done (visitor insert 201, read denied)"
+    },
+    {
+      "capability": "file uploads / storage",
+      "source": "none (CMS uses image URLs)",
+      "outcome": "not-applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "schedules / webhooks / external providers",
+      "source": "none found",
+      "outcome": "not-applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "hosting lock (feed/cms preview-only)",
+      "source": "src/lib/hosting-lock.ts",
+      "outcome": "preserve",
+      "status": "verified",
+      "next_action": "done (tests pass)"
+    },
+    {
+      "capability": "cutover (nempogarut.com domain)",
+      "source": "published domain",
+      "outcome": "pending",
+      "status": "pending",
+      "next_action": "after publish, owner moves the domain to this project"
+    },
+    {
+      "capability": "verification",
+      "source": "-",
+      "outcome": "verify",
+      "status": "verified",
+      "next_action": "build OK, 35 test files pass"
+    },
+    {
+      "capability": "yearbook photo uploads (table + private bucket)",
+      "source": "src/lib/yearbook-photo.functions.ts",
+      "outcome": "migrate",
+      "status": "implemented",
+      "next_action": "done"
+    }
   ]
 }
