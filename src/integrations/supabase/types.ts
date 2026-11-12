@@ -1060,6 +1060,36 @@ export type Database = {
         }
         Relationships: []
       }
+      yearbook_photo_submissions: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          mime_type: string
+          sender_name: string
+          status: string
+          storage_path: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          mime_type: string
+          sender_name?: string
+          status?: string
+          storage_path: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          mime_type?: string
+          sender_name?: string
+          status?: string
+          storage_path?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
