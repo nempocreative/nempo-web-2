@@ -43,9 +43,37 @@ const hand: CSSProperties = { fontFamily: HAND };
 
 function Eyebrow({ children, color = ACCENT }: { children: ReactNode; color?: string }) {
   return (
-    <p className="text-[11px] font-black uppercase tracking-[0.28em]" style={{ color }}>
+    <p className="flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.28em]" style={{ color }}>
+      <span aria-hidden className="inline-block h-px w-8" style={{ background: color }} />
       {children}
     </p>
+  );
+}
+
+function Tape({ className = "", rotate = -4 }: { className?: string; rotate?: number }) {
+  return (
+    <span
+      aria-hidden
+      className={`absolute z-10 h-5 w-20 ${className}`}
+      style={{ background: "rgba(242,160,7,.34)", border: "1px solid rgba(242,160,7,.4)", transform: `rotate(${rotate}deg)` }}
+    />
+  );
+}
+
+function Polaroid({ src, caption, rotate, className = "" }: { src: string; caption: string; rotate: number; className?: string }) {
+  return (
+    <figure
+      className={`mk-lift relative bg-white p-2.5 pb-2 ${className}`}
+      style={{ transform: `rotate(${rotate}deg)`, boxShadow: "0 18px 40px -22px rgba(20,28,63,.55)" }}
+    >
+      <Tape className="-top-3 left-1/2 -translate-x-1/2" rotate={rotate * -1.5} />
+      <div className="aspect-[4/3] overflow-hidden">
+        <img src={src} alt={caption} loading="lazy" className="h-full w-full object-cover" />
+      </div>
+      <figcaption className="mt-2 break-words px-1 pb-1 text-center text-xl leading-[1.15]" style={{ ...hand, color: INK }}>
+        {caption}
+      </figcaption>
+    </figure>
   );
 }
 
