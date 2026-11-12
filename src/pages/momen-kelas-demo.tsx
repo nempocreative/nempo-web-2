@@ -177,13 +177,21 @@ function WaliKelasSection() {
     <section className="border-y px-5 py-16 sm:px-10" style={{ borderColor: LINE, background: CARD }}>
       <div className="mx-auto grid max-w-5xl items-center gap-8 sm:grid-cols-[220px_1fr]">
         <Reveal y={24}>
-          <img
-            src={waliKelas.foto}
-            alt={`Foto ${waliKelas.nama}`}
-            className="mx-auto aspect-square w-44 rounded-3xl object-cover sm:w-full"
-            style={{ border: `3px solid ${LINE}` }}
-            loading="lazy"
-          />
+          <div className="relative mx-auto w-44 sm:w-full">
+            <div
+              aria-hidden
+              className="absolute -inset-3 rounded-[2rem]"
+              style={{ border: `2px dashed ${BRASS}`, transform: "rotate(-2deg)" }}
+            />
+            <img
+              src={waliKelas.foto}
+              alt={`Foto ${waliKelas.nama}`}
+              className="relative aspect-square w-full rounded-3xl object-cover"
+              style={{ border: `3px solid ${LINE}` }}
+              loading="lazy"
+            />
+            <Tape className="-top-4 left-1/2 -translate-x-1/2" rotate={3} />
+          </div>
         </Reveal>
         <Reveal delay={120} y={24}>
           <Eyebrow>Wali kelas</Eyebrow>
@@ -217,7 +225,7 @@ function StrukturSection() {
           return (
             <article
               key={s.jabatan}
-              className="rounded-2xl p-5 text-center"
+              className="mk-card rounded-2xl p-5 text-center"
               style={{ background: CARD, border: `1px solid ${LINE}`, animationDelay: `${i * 80}ms` }}
             >
               <img
@@ -254,7 +262,7 @@ function SiswaSection() {
           {siswaKelas.map((s, i) => (
             <article
               key={s.id}
-              className="overflow-hidden rounded-2xl"
+              className="mk-card overflow-hidden rounded-2xl"
               style={{ background: PAPER, border: `1px solid ${LINE}`, animationDelay: `${i * 70}ms` }}
             >
               <img src={s.foto} alt={`Foto ${s.nama}`} className="aspect-[4/5] w-full object-cover" loading="lazy" />
