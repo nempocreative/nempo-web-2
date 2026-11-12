@@ -738,6 +738,13 @@ body,
 }
 
 @theme inline {
+  --color-psg-bg: #1a0d06;
+  --color-psg-accent: #d4a017;
+  --color-psg-text: #f5e6c8;
+  --color-psg-primary: #8b3a1f;
+  --color-psg-muted: #9a7a5a;
+  --font-psg-display: 'Playfair Display', Georgia, serif;
+  --font-psg-body: 'Source Sans 3', 'Helvetica Neue', sans-serif;
   --color-brand: #0194f3;
   --color-brand-on: #ffffff;
   --color-brand-navy: #17314a;
@@ -2086,3 +2093,29 @@ html, body, #root {
 @media (prefers-reduced-motion: reduce) {
   .yb-vinyl-spin, .yb-eq > i, .yb-player-in { animation: none !important; }
 }
+
+/* Program proposal deck (Pasar Seni Garut): slides size themselves with container units. */
+.psg-deck {
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+  background: #0d0703;
+  color: #f5e6c8;
+  font-family: var(--font-body);
+}
+.psg-stage {
+  container-type: size;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: min(100%, calc((100dvh - 9.5rem) * 16 / 9));
+  margin-inline: auto;
+  overflow: hidden;
+  background: #1a0d06;
+  border-radius: 0.75rem;
+  box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.8), 0 0 0 1px rgb(212 160 23 / 0.18);
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.psg-deck:fullscreen { display: flex; flex-direction: column; justify-content: center; }
+.psg-deck:fullscreen .psg-stage { width: min(100vw, calc(100dvh * 16 / 9)); border-radius: 0; box-shadow: none; }
+.psg-deck:fullscreen .psg-chrome { display: none; }

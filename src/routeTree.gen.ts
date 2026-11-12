@@ -24,6 +24,7 @@ import { Route as ApiSplatRouteImport } from './routes/api/$'
 import { Route as ApiBackupRouteImport } from './routes/api/backup'
 import { Route as CmsIndexRouteImport } from './routes/cms.index'
 import { Route as CmsSplatRouteImport } from './routes/cms.$'
+import { Route as ProgramPasarSeniGarutRouteImport } from './routes/program.pasar-seni-garut'
 import { Route as YearBookEventRouteImport } from './routes/year-book.event'
 import { Route as YearBookGengGrupRouteImport } from './routes/year-book.geng-grup'
 import { Route as YearBookKomunitasRouteImport } from './routes/year-book.komunitas'
@@ -116,6 +117,11 @@ const CmsIndexRoute = CmsIndexRouteImport.update({
 const CmsSplatRoute = CmsSplatRouteImport.update({
   id: '/cms/$',
   path: '/cms/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgramPasarSeniGarutRoute = ProgramPasarSeniGarutRouteImport.update({
+  id: '/program/pasar-seni-garut',
+  path: '/program/pasar-seni-garut',
   getParentRoute: () => rootRouteImport,
 } as any)
 const YearBookEventRoute = YearBookEventRouteImport.update({
@@ -237,6 +243,7 @@ export interface FileRoutesByFullPath {
   '/api/$': typeof ApiSplatRoute
   '/api/backup': typeof ApiBackupRoute
   '/cms/$': typeof CmsSplatRoute
+  '/program/pasar-seni-garut': typeof ProgramPasarSeniGarutRoute
   '/year-book/event': typeof YearBookEventRoute
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
   '/year-book/komunitas': typeof YearBookKomunitasRoute
@@ -272,6 +279,7 @@ export interface FileRoutesByTo {
   '/api/$': typeof ApiSplatRoute
   '/api/backup': typeof ApiBackupRoute
   '/cms/$': typeof CmsSplatRoute
+  '/program/pasar-seni-garut': typeof ProgramPasarSeniGarutRoute
   '/year-book/event': typeof YearBookEventRoute
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
   '/year-book/komunitas': typeof YearBookKomunitasRoute
@@ -308,6 +316,7 @@ export interface FileRoutesById {
   '/api/$': typeof ApiSplatRoute
   '/api/backup': typeof ApiBackupRoute
   '/cms/$': typeof CmsSplatRoute
+  '/program/pasar-seni-garut': typeof ProgramPasarSeniGarutRoute
   '/year-book/event': typeof YearBookEventRoute
   '/year-book/geng-grup': typeof YearBookGengGrupRoute
   '/year-book/komunitas': typeof YearBookKomunitasRoute
@@ -345,6 +354,7 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/api/backup'
     | '/cms/$'
+    | '/program/pasar-seni-garut'
     | '/year-book/event'
     | '/year-book/geng-grup'
     | '/year-book/komunitas'
@@ -380,6 +390,7 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/api/backup'
     | '/cms/$'
+    | '/program/pasar-seni-garut'
     | '/year-book/event'
     | '/year-book/geng-grup'
     | '/year-book/komunitas'
@@ -415,6 +426,7 @@ export interface FileRouteTypes {
     | '/api/$'
     | '/api/backup'
     | '/cms/$'
+    | '/program/pasar-seni-garut'
     | '/year-book/event'
     | '/year-book/geng-grup'
     | '/year-book/komunitas'
@@ -451,6 +463,7 @@ export interface RootRouteChildren {
   ApiSplatRoute: typeof ApiSplatRoute
   ApiBackupRoute: typeof ApiBackupRoute
   CmsSplatRoute: typeof CmsSplatRoute
+  ProgramPasarSeniGarutRoute: typeof ProgramPasarSeniGarutRoute
   YearBookEventRoute: typeof YearBookEventRoute
   YearBookGengGrupRoute: typeof YearBookGengGrupRoute
   YearBookKomunitasRoute: typeof YearBookKomunitasRoute
@@ -564,6 +577,13 @@ declare module '@tanstack/react-router' {
       path: '/cms/$'
       fullPath: '/cms/$'
       preLoaderRoute: typeof CmsSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/program/pasar-seni-garut': {
+      id: '/program/pasar-seni-garut'
+      path: '/program/pasar-seni-garut'
+      fullPath: '/program/pasar-seni-garut'
+      preLoaderRoute: typeof ProgramPasarSeniGarutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/year-book/event': {
@@ -752,6 +772,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSplatRoute: ApiSplatRoute,
   ApiBackupRoute: ApiBackupRoute,
   CmsSplatRoute: CmsSplatRoute,
+  ProgramPasarSeniGarutRoute: ProgramPasarSeniGarutRoute,
   YearBookEventRoute: YearBookEventRoute,
   YearBookGengGrupRoute: YearBookGengGrupRoute,
   YearBookKomunitasRoute: YearBookKomunitasRoute,
