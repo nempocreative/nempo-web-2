@@ -58,7 +58,8 @@ const momenKategori = [
     icon: School,
     nama: "Kelas",
     ringkas: "Versi kecil untuk satu kelas: wali kelas, daftar siswa, momen sehari-hari, dan pesan antarteman.",
-    status: "Segera hadir",
+    status: "Sudah bisa dilihat",
+    href: "/year-book/kelas",
   },
   {
     icon: Heart,
