@@ -8,3 +8,4 @@
   - [x] Event — /year-book/event: festival rekaan, cuplikan foto, susunan acara, persiapan, panitia (foto satu-satu), galeri, pesan
   - [x] Komunitas — /year-book/komunitas: komunitas sepeda rekaan 5 tahun, perjalanan anggota per tahun, agenda, penggerak (foto satu-satu), rute, album, pesan
   - [x] Ucapan Spesial — /year-book/ucapan-spesial: pacar, sahabat, wisuda; amplop, surat, kartu balik, kenangan, lilin/toga, ucapan teman
+  - [x] Kartu Ucapan Spesial di halaman Momen Digital aktif ("Sudah bisa dilihat")
