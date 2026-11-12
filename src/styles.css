@@ -5,6 +5,7 @@
 @import "./styles/momen-organisasi.css";
 @import "./styles/momen-event.css";
 @import "./styles/momen-komunitas.css";
+@import "./styles/ucapan-spesial.css";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
