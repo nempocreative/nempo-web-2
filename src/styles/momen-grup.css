@@ -76,7 +76,7 @@
   .mg-section { padding-block: 52px; }
   .mg-title { font-size: 30px; }
   .mg-hero { height: 620px; min-height: 540px; max-height: 76svh; background: var(--foreground); }
-  .mg-hero-photo { height: 70%; object-position: center; }
+  .mg-hero-photo { height: auto; aspect-ratio: 3 / 2; object-fit: contain; object-position: center; }
   .mg-hero-copy { bottom: 32px; }
   .mg-hero-copy h1 { font-size: 56px; }
   .mg-hero-tag { top: 66px; left: 20px; right: auto; }
