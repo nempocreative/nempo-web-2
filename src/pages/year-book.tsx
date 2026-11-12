@@ -8,6 +8,7 @@ import {
   CalendarDays,
   Camera,
   Flag,
+  Gift,
   GraduationCap,
   Heart,
   MessageCircle,
@@ -81,6 +82,12 @@ const momenKategori = [
     icon: Users,
     nama: "Komunitas",
     ringkas: "Rayakan anniversary atau momen besar komunitas: sejarah, anggota, dan capaian setahun.",
+    status: "Segera hadir",
+  },
+  {
+    icon: Gift,
+    nama: "Ucapan Spesial",
+    ringkas: "Halaman ucapan untuk satu orang: ulang tahun pacar atau teman, graduation, dan momen pribadi lainnya.",
     status: "Segera hadir",
   },
 ];
