@@ -265,7 +265,10 @@ function SiswaSection() {
               className="mk-card overflow-hidden rounded-2xl"
               style={{ background: PAPER, border: `1px solid ${LINE}`, animationDelay: `${i * 70}ms` }}
             >
-              <img src={s.foto} alt={`Foto ${s.nama}`} className="aspect-[4/5] w-full object-cover" loading="lazy" />
+              <div className="relative">
+                <img src={s.foto} alt={`Foto ${s.nama}`} className="aspect-[4/5] w-full object-cover" loading="lazy" />
+                <span aria-hidden className="absolute inset-x-0 top-0 h-1.5" style={{ background: s.warna }} />
+              </div>
               <div className="p-4">
                 <h3 className="text-lg font-bold" style={serif}>{s.nama}</h3>
                 <p className="text-xs font-bold" style={{ color: s.warna }}>{s.julukan}</p>
@@ -299,24 +302,17 @@ function MomenSection() {
           Momen yang tidak sempat difoto pun masih kami ingat.
         </h2>
       </Reveal>
-      <div ref={ref} className={`mt-9 grid gap-4 sm:grid-cols-2 ${className}`}>
+      <div ref={ref} className={`mt-9 grid gap-6 sm:grid-cols-2 ${className}`}>
         {momenKelas.map((m, i) => (
-          <figure
-            key={m.caption}
-            className="overflow-hidden rounded-2xl"
-            style={{ background: CARD, border: `1px solid ${LINE}`, animationDelay: `${i * 80}ms` }}
-          >
-            <img src={m.src} alt={m.caption} className="aspect-[4/3] w-full object-cover" loading="lazy" />
-            <figcaption className="flex items-center justify-between gap-3 px-4 py-3">
-              <span className="text-sm font-bold" style={{ color: INK }}>{m.caption}</span>
-              <span
-                className="shrink-0 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em]"
-                style={{ background: "rgba(43,63,216,.1)", color: ACCENT }}
-              >
-                {m.tag}
-              </span>
-            </figcaption>
-          </figure>
+          <div key={m.caption} className="relative" style={{ animationDelay: `${i * 80}ms` }}>
+            <Polaroid src={m.src} caption={m.caption} rotate={i % 2 === 0 ? -1.6 : 1.8} />
+            <span
+              className="absolute -right-1 -top-2 z-20 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em] shadow-sm"
+              style={{ background: CARD, color: ACCENT, border: `1px solid ${LINE}` }}
+            >
+              {m.tag}
+            </span>
+          </div>
         ))}
       </div>
     </section>
@@ -417,9 +413,10 @@ function DindingPesanSection() {
           {notes.map((n, i) => (
             <Reveal key={`${n.dari}-${i}`} y={16}>
               <blockquote
-                className="rounded-xl p-4 shadow-sm"
+                className="relative rounded-xl p-4 pt-6 shadow-sm"
                 style={{ background: NOTE_COLORS[i % NOTE_COLORS.length], transform: `rotate(${i % 2 === 0 ? -1.2 : 1.1}deg)` }}
               >
+                <Tape className="-top-2.5 left-1/2 h-4 w-14 -translate-x-1/2" rotate={i % 2 === 0 ? 4 : -5} />
                 <p className="text-lg leading-snug" style={{ ...hand, color: INK }}>{n.teks}</p>
                 <footer className="mt-2 text-xs font-black uppercase tracking-[0.14em]" style={{ color: INK_SOFT }}>
                   — {n.dari}
